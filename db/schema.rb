@@ -11,21 +11,64 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150330210300) do
+ActiveRecord::Schema.define(version: 20150331210322) do
+
+# Could not dump table "assignments" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
+
+  create_table "courses", force: :cascade do |t|
+    t.string   "course_name"
+    t.integer  "course_id"
+    t.string   "semester"
+    t.string   "year"
+    t.string   "instructor_ids"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "forvos", force: :cascade do |t|
+    t.integer "forvo_id"
+    t.string  "word"
+    t.string  "lang_code"
+    t.string  "speaker_gender"
+    t.text    "forvo_data"
+  end
+
+  create_table "lessons", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "course_id"
+    t.text     "audio_paths"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "user_courses", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "course_id"
+    t.string   "course_role"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "user_courses", ["course_id"], name: "index_user_courses_on_course_id"
+  add_index "user_courses", ["user_id"], name: "index_user_courses_on_user_id"
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "admin",                  default: false
+    t.boolean  "teacher"
+    t.boolean  "student"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
