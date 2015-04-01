@@ -1,5 +1,7 @@
 require 'rails_helper'
 
+RSpec.describe Exercise, type: :model do
+
 it 'belongs to only one student'
 
 it 'is assigned by a teacher'
@@ -15,6 +17,10 @@ it 'lets a teacher pick the content'
 it 'knows what audio it needs'
 
 it 'knows it boilerplate instructions'
+
+it 'can save IPA input'
+
+it 'can render IPA input'
 
 it 'knows its type'
   #TrscIPA written word into IPA (opt audio recording)

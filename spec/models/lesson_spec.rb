@@ -1,5 +1,7 @@
 require 'rails_helper'
 
+RSpec.describe Lesson, type: :model do
+
 it 'can be created by a teacher'
 
 it 'can use audio from forvo'

@@ -1,5 +1,7 @@
 require 'rails_helper'
 
+RSpec.describe User, type: :model do
+
 it 'can give feedback if teacher'
 
 it 'can view feedback if student'
