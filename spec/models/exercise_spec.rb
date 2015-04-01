@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Exercise, type: :model do
 
-it 'belongs to only one student'
+it 'can belong to each lesson only once' #TODO per course? 
 
 it 'is assigned by a teacher'
 
@@ -21,6 +21,10 @@ it 'knows it boilerplate instructions'
 it 'can save IPA input'
 
 it 'can render IPA input'
+
+it 'can be added to a lesson'
+
+it 'cannot be added to the same lesson twice'
 
 it 'knows its type'
   #TrscIPA written word into IPA (opt audio recording)
