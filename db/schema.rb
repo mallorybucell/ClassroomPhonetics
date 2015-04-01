@@ -11,23 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150401103654) do
+ActiveRecord::Schema.define(version: 20150331210322) do
 
-  create_table "assignments", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "lesson_id"
-    t.text     "response"
-    t.date     "due_date"
-    t.time     "due_time"
-    t.date     "submit_date"
-    t.time     "submit_time"
-    t.integer  "assigned_by"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "assignments", ["lesson_id"], name: "index_assignments_on_lesson_id"
-  add_index "assignments", ["user_id"], name: "index_assignments_on_user_id"
+# Could not dump table "assignments" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
 
   create_table "courses", force: :cascade do |t|
     t.string   "course_name"
@@ -39,14 +26,6 @@ ActiveRecord::Schema.define(version: 20150401103654) do
     t.datetime "updated_at",     null: false
   end
 
-  create_table "exercises", force: :cascade do |t|
-    t.string   "exercise_type"
-    t.integer  "forvo_id"
-    t.text     "content"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
-
   create_table "forvos", force: :cascade do |t|
     t.integer "forvo_id"
     t.string  "word"
@@ -54,16 +33,6 @@ ActiveRecord::Schema.define(version: 20150401103654) do
     t.string  "speaker_gender"
     t.text    "forvo_data"
   end
-
-  create_table "lesson_exercises", force: :cascade do |t|
-    t.integer  "lesson_id"
-    t.integer  "exercise_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "lesson_exercises", ["exercise_id"], name: "index_lesson_exercises_on_exercise_id"
-  add_index "lesson_exercises", ["lesson_id"], name: "index_lesson_exercises_on_lesson_id"
 
   create_table "lessons", force: :cascade do |t|
     t.integer  "user_id"
