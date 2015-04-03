@@ -2,17 +2,20 @@ require 'rails_helper'
 
 RSpec.describe Exercise, type: :model do
 
-it 'can belong to each lesson only once' #TODO per course? 
+it 'can belong to each lesson only once' do #TODO per course? 
 
-it 'is assigned by a teacher'
+  l = FactoryGirl.create  :lesson
+  e = FactoryGirl.create :exercise
+  LessonExercise.create!(lesson_id: l.id, exercise_id: e.id)
+  
+  expect do
+    (LessonExercise.create!(lesson_id: l.id, exercise_id: e.id))
+  end.to raise_error
+end
 
-it 'is associated with a course'#may be unnecessary
-
-it 'has a rubric'
+it 'knows its correct response(s)'
 
 it 'knows what content it requires'
-
-it 'lets a teacher pick the content'
 
 it 'knows what audio it needs'
 
@@ -24,9 +27,11 @@ it 'can render IPA input'
 
 it 'can be added to a lesson'
 
+it 'can displaly feedback to students'
+
 it 'cannot be added to the same lesson twice'
 
-it 'knows its type'
+it 'knows its codes'
   #TrscIPA written word into IPA (opt audio recording)
   #TrscAudio  transcribe audio into IPA
   #IPAnat    from ipa into nat lang word

@@ -1,0 +1,8 @@
+<h1>Create a new lesson</h1>
+
+<%= form_for @lesson, url: course_lessons_path do |f| %>
+  <% #TODO static field showing course? %>
+  <%=f.label :description, "Lesson Description" %>
+  <%=f.text_field :description %>
+  <button>Make New Lesson</button>
+<% end %>

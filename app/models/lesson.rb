@@ -4,4 +4,6 @@ class Lesson < ActiveRecord::Base
   has_many    :assignments
   has_many    :exercises
   has_many    :exercises, through: :lesson_exercises
+
+
 end

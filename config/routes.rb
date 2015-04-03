@@ -3,8 +3,12 @@ Rails.application.routes.draw do
   
   root 'application#home'
 
-  resources :lesson do
+  resources :course do
+    resources :lessons, only: [:new, :create, :edit, :update] do
+    end
   end
 
-  get '/return_words' => 'lessons#return_words'
+  resources :exercises
+
+  # get '/return_words' => 'lessons#return_words'
 end

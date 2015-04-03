@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150401103654) do
+ActiveRecord::Schema.define(version: 20150402192154) do
 
   create_table "assignments", force: :cascade do |t|
-    t.integer  "user_id"
+    t.integer  "student_id"
     t.integer  "lesson_id"
-    t.text     "response"
+    t.text     "response" #TODO: Change this to a table
     t.date     "due_date"
     t.time     "due_time"
     t.date     "submit_date"
@@ -27,11 +27,11 @@ ActiveRecord::Schema.define(version: 20150401103654) do
   end
 
   add_index "assignments", ["lesson_id"], name: "index_assignments_on_lesson_id"
-  add_index "assignments", ["user_id"], name: "index_assignments_on_user_id"
+  add_index "assignments", ["student_id"], name: "index_assignments_on_student_id"
 
   create_table "courses", force: :cascade do |t|
     t.string   "course_name"
-    t.integer  "course_id"
+    t.integer  "internal_id"
     t.string   "semester"
     t.string   "year"
     t.string   "instructor_ids"
@@ -40,11 +40,12 @@ ActiveRecord::Schema.define(version: 20150401103654) do
   end
 
   create_table "exercises", force: :cascade do |t|
-    t.string   "exercise_type"
+    t.string   "exercise_code"
     t.integer  "forvo_id"
     t.text     "content"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.integer  "created_by_teacher_id"
   end
 
   create_table "forvos", force: :cascade do |t|
@@ -53,6 +54,7 @@ ActiveRecord::Schema.define(version: 20150401103654) do
     t.string  "lang_code"
     t.string  "speaker_gender"
     t.text    "forvo_data"
+    t.integer "added_by_teacher_id"
   end
 
   create_table "lesson_exercises", force: :cascade do |t|
@@ -66,19 +68,19 @@ ActiveRecord::Schema.define(version: 20150401103654) do
   add_index "lesson_exercises", ["lesson_id"], name: "index_lesson_exercises_on_lesson_id"
 
   create_table "lessons", force: :cascade do |t|
-    t.integer  "user_id"
+    t.integer  "created_by_teacher_id"
     t.integer  "course_id"
-    t.text     "audio_paths"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.string   "description"
   end
 
   create_table "user_courses", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "course_id"
-    t.string   "course_role"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "user_role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "user_courses", ["course_id"], name: "index_user_courses_on_course_id"
