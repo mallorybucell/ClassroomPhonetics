@@ -6,13 +6,25 @@ class LessonsController < ApplicationController
   end
 
   def create
-    lesson = current_user.create_lesson!(params[:course_id], params[:lesson][:description])
+    lesson = current_user.create_lesson!(params[:course_id], params[:lesson][:description]) #lesson_params)
     if lesson != nil
       redirect_to new_course_lesson_path(params[:course_id].to_i)
     else
       flash[:notice] = "Something went wrong. Please try again."
       render :new
     end
+  end
+
+  def edit
+    #TODO
+  end
+
+  def update
+    #TODO
+  end
+
+  def destroy
+    #TODO
   end
 
   # def return_words
@@ -22,8 +34,8 @@ class LessonsController < ApplicationController
   # end
 
   private
-    def lesson_params
-      #TODO
+    def lesson_params #TODO: FIX create function to take this (user func takes 2 args OR pass in params more securely
+      params.require(:lesson).permit(:course_id, :description)
     end
 
     def authenticate_teacher!  

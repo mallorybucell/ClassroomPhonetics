@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20150402192154) do
     t.date     "submit_date"
     t.time     "submit_time"
     t.integer  "assigned_by"
+    
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
