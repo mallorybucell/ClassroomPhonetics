@@ -11,18 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150402192154) do
+ActiveRecord::Schema.define(version: 20150405164527) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "student_id"
     t.integer  "lesson_id"
-    t.text     "response" #TODO: Change this to a table
+    t.text     "response"
     t.date     "due_date"
     t.time     "due_time"
     t.date     "submit_date"
     t.time     "submit_time"
     t.integer  "assigned_by"
-    
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
@@ -47,6 +46,7 @@ ActiveRecord::Schema.define(version: 20150402192154) do
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
     t.integer  "created_by_teacher_id"
+    t.string   "description"
   end
 
   create_table "forvos", force: :cascade do |t|

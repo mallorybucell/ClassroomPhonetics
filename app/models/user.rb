@@ -10,8 +10,16 @@ class User < ActiveRecord::Base
   has_many :courses, through: :user_courses
 
   def create_lesson!(course_id, description)
-    l = Lesson.create!(course_id: course_id, created_by_teacher_id: self.id, description: description) if self.user_courses.where(course_id: course_id).first.user_role
+    l = Lesson.create!(course_id: course_id, created_by_teacher_id: self.id, description: description) if user_course_teacher?
     l
+  end
+
+  def create_exercise(description)
+    Exercise.create!(description: description, created_by_teacher_id: self.id)
+  end
+
+  def user_course_teacher(course_id)
+    self.user_courses.where(course_id: course_id).first.user_role == "teacher"
   end
 
 end
