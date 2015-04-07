@@ -10,6 +10,12 @@ Rails.application.routes.draw do
     end
   end
 
+  scope '/assignments' do
+    resources :responses
+  end
+
+  resource :assignments, only: [:new, :create, :edit, :update, :destroy]
+
   resources :exercises, only: [:new, :create, :edit, :update] do
     get   '/choose_type'           =>  'exercises#choose_type',            as: 'choose_type'
     post  '/add_type'              =>  'exercises#add_type',               as: 'add_type'

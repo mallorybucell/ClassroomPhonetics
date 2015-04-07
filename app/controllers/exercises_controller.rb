@@ -8,14 +8,15 @@ class ExercisesController < ApplicationController
   end
 
   def create
-    #TODO params security
-  if  @_current_exercise = current_user.create_exercise(params[:description])
-      @_current_exercise = @_current_exercise
-      flash[:notice]= "New exercise created. Please choose a type for this exercise."
-      redirect_to exercise_choose_type_path
-  else
-    flash[:notice] = "Something went wrong. Please try again."
-    render :new
+      #TODO params security
+    if  @_current_exercise = current_user.create_exercise(params[:description])
+        @_current_exercise = @_current_exercise
+        flash[:notice]= "New exercise created. Please choose a type for this exercise."
+        redirect_to exercise_choose_type_path
+    else
+      flash[:notice] = "Something went wrong. Please try again."
+      render :new
+    end
   end
 
   def choose_type
