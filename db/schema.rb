@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150405164527) do
+ActiveRecord::Schema.define(version: 20150405212316) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "student_id"
@@ -28,6 +28,16 @@ ActiveRecord::Schema.define(version: 20150405164527) do
 
   add_index "assignments", ["lesson_id"], name: "index_assignments_on_lesson_id"
   add_index "assignments", ["student_id"], name: "index_assignments_on_student_id"
+
+  create_table "audios", force: :cascade do |t|
+    t.integer "forvo_id"
+    t.string  "word"
+    t.string  "lang_code"
+    t.string  "speaker_gender"
+    t.text    "forvo_data"
+    t.integer "added_by_teacher_id"
+    t.string  "audio_source"
+  end
 
   create_table "courses", force: :cascade do |t|
     t.string   "course_name"
@@ -47,15 +57,6 @@ ActiveRecord::Schema.define(version: 20150405164527) do
     t.datetime "updated_at",            null: false
     t.integer  "created_by_teacher_id"
     t.string   "description"
-  end
-
-  create_table "forvos", force: :cascade do |t|
-    t.integer "forvo_id"
-    t.string  "word"
-    t.string  "lang_code"
-    t.string  "speaker_gender"
-    t.text    "forvo_data"
-    t.integer "added_by_teacher_id"
   end
 
   create_table "lesson_exercises", force: :cascade do |t|

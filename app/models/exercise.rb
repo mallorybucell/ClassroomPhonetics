@@ -5,4 +5,12 @@ class Exercise < ActiveRecord::Base
   def create_exercise(exercise_code)
   end
 
+  def stem_text_hash
+    fail
+  end
+
+  def content_type_explanation_hash
+    fail
+  end
+
 end

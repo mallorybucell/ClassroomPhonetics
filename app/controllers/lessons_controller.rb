@@ -1,5 +1,6 @@
 class LessonsController < ApplicationController
   before_action :authenticate_teacher!
+  #TODO make sure lesson cannot be assigned without exercises
 
   def new
     @lesson = Lesson.new
@@ -21,6 +22,14 @@ class LessonsController < ApplicationController
 
   def update
     #TODO
+  end
+
+  def choose_exercise
+    fail
+  end
+
+  def add_exercise
+    fail
   end
 
   def destroy

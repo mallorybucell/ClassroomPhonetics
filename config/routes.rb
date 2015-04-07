@@ -13,10 +13,9 @@ Rails.application.routes.draw do
     post  '/add_type'              =>  'exercises#add_type',               as: 'add_type'
     get   '/select_audio'          =>  'exercises#select_audio',           as: 'select_audio'
     post  '/update_audio'          =>  'exercises#update_audio',           as: 'update_audio'
-    get   '/enter_IPA_stim '       =>  'exercises#enter_IPA_stim',         as: 'enter_IPA_stim' 
-    post  '/update_IPA_stim'       =>  'exercises#update_IPA_stim',        as: 'update_IPA_stim'
-    get   '/enter_base_lang_stim'  =>  'exercises#enter_base_lang_stim',   as: 'enter_base_lang_stim'
-    post  '/update_base_lang_stim' =>  'exercises#update_base_lang_stim',  as: 'update_base_lang_stim'
+    get   '/enter_stim_content'    =>  'exercises#enter_stim_content',     as: 'enter_stim_content' 
+    post  '/update_stim_content'   =>  'exercises#update_stim_content',    as: 'update_stim_content'
+
   end
 
   # get '/return_words' => 'lessons#return_words'
