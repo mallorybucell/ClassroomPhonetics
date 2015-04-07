@@ -3,8 +3,20 @@ Rails.application.routes.draw do
   
   root 'application#home'
 
-  resources :lesson do
+  resources :course do
+    resources :lessons, only: [:new, :create, :edit, :update] do
+    end
   end
 
-  get '/return_words' => 'lessons#return_words'
+  resources :exercises, only: [:new, :create, :edit, :update] do
+    get   '/choose_type'           =>  'exercises#choose_type',            as: 'choose_type'
+    post  '/add_type'              =>  'exercises#add_type',               as: 'add_type'
+    get   '/select_audio'          =>  'exercises#select_audio',           as: 'select_audio'
+    post  '/update_audio'          =>  'exercises#update_audio',           as: 'update_audio'
+    get   '/enter_stim_content'    =>  'exercises#enter_stim_content',     as: 'enter_stim_content' 
+    post  '/update_stim_content'   =>  'exercises#update_stim_content',    as: 'update_stim_content'
+
+  end
+
+  # get '/return_words' => 'lessons#return_words'
 end

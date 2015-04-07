@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :user_course do
-    user nil
-course nil
-course_role "MyString"
+    user
+    course
+    user_role "student"
   end
 
 end

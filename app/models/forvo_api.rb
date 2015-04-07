@@ -1,4 +1,4 @@
-class Forvo
+class ForvoApi
 
   include HTTParty
     # base_uri "apifree.forvo.com/key/#{ENV['FORVO_API_KEY']}"
@@ -9,11 +9,6 @@ class Forvo
 
   def self.store_audio_id
   end
-
-  def format_js_for_insert forvo_id
-    "<script type=\"text/javascript\" src=\"http://www.forvo.com/_ext/ext-prons.js?id=#{forvo_id.to_s}\" charset=\"utf-8\"></script>"
-  end
-
 
 
 end
