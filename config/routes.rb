@@ -4,10 +4,12 @@ Rails.application.routes.draw do
   root 'application#home'
 
   resources :course do
-    resources :lessons, only: [:new, :create, :edit, :update] do
-      get '/choose_exercise'  =>  'lessons#choose_exercise',        as: 'choose_exercise'
-      post '/add_exercise'    =>  'lessons#add_exercise',           as: 'add_exercise'
-    end
+  end
+
+  resources :lessons, only: [:new, :create, :show, :edit, :update] do
+    get '/choose_exercise'  =>  'lessons#choose_exercise',        as: 'choose_exercise'
+    post '/add_exercise'    =>  'lessons#add_exercise',           as: 'add_exercise'
+    post '/remove_exercise' =>  'lessons#remove_exercise',        as: 'remove_exercise' 
   end
 
   scope '/assignments' do

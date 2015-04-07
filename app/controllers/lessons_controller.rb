@@ -1,22 +1,31 @@
 class LessonsController < ApplicationController
   before_action :authenticate_teacher!
+  before_action :authenticate_lesson_owner!, except: [:new, :create]
+  before_action :lookup_lesson, except: [:new, :create]
   #TODO make sure lesson cannot be assigned without exercises
 
   def new
     @lesson = Lesson.new
+    @courses = Course.all
   end
 
   def create
-    lesson = current_user.create_lesson!(params[:course_id], params[:lesson][:description]) #lesson_params)
+    lesson = current_user.create_lesson!(params[:lesson][:course_id], params[:lesson][:description]) #lesson_params)
     if lesson != nil
-      redirect_to new_course_lesson_path(params[:course_id].to_i)
+      flash[:notice] = "Lesson created successfully!"
+      redirect_to lesson_choose_exercise_path(lesson.id)
     else
       flash[:notice] = "Something went wrong. Please try again."
       render :new
     end
   end
 
+  def show
+    @lesson = lookup_lesson
+  end
+
   def edit
+    #Description only
     #TODO
   end
 
@@ -25,11 +34,25 @@ class LessonsController < ApplicationController
   end
 
   def choose_exercise
-    fail
+    @lesson_exercise = LessonExercise.new
+    @lesson = lookup_lesson
+    @exercises = Exercise.where(created_by_teacher_id: current_user.id)
+    @assignment = Assignment.new
   end
 
-  def add_exercise
-    fail
+  def add_exercise #remove exercise
+    @lesson = lookup_lesson
+    if LessonExercise.create!(lesson_id: params[:lesson_id], exercise_id: params[:exercise_id])
+      flash[:notice] = "Exercise added!"
+      redirect_to lesson_choose_exercise_path(@lesson)
+    else
+      flash[:notice] = "Something went wrong. Please try again."
+      render :choose_exercise
+    end
+  end
+
+  def remove_exercise
+    fail #TODO
   end
 
   def destroy
@@ -47,11 +70,20 @@ class LessonsController < ApplicationController
       params.require(:lesson).permit(:course_id, :description)
     end
 
-    def authenticate_teacher!  
-      raise User::UnauthorizedError unless (current_user.user_courses.where(course_id: params[:course_id]).first.user_role == "teacher")
-      #TODO change user_role to enum
-      #TODO define UnauthorizedError
-    end
+  def authenticate_teacher!
+    raise User::UnauthorizedError unless current_user.teacher?
+    #TODO change user_role to enum
+    #TODO define UnauthorizedError
+  end
+
+  def authenticate_lesson_owner!
+    #TODO security
+    raise User::UnauthorizedError unless Lesson.find(params[:lesson_id].to_i).created_by_teacher_id == current_user.id
+  end
+
+  def lookup_lesson
+    Lesson.find(params[:lesson_id].to_i)
+  end
 
 
 end

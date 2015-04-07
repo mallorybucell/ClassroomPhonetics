@@ -12,7 +12,7 @@ class ExercisesController < ApplicationController
     if  @_current_exercise = current_user.create_exercise(params[:description])
         @_current_exercise = @_current_exercise
         flash[:notice]= "New exercise created. Please choose a type for this exercise."
-        redirect_to exercise_choose_type_path
+        redirect_to exercise_choose_type_path(lesson.id)
     else
       flash[:notice] = "Something went wrong. Please try again."
       render :new

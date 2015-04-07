@@ -25,7 +25,4 @@ class AssignmentsController < ApplicationController
   def destroy
   end
 
-  def enter_responses
-    fail
-  end
 end

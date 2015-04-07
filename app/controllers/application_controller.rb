@@ -6,4 +6,6 @@ class ApplicationController < ActionController::Base
   def home
   end
   
+  #TODO Rescue from Std Error
+  #TODO Rescue from User::UnauthorizedError
 end
