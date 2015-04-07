@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   resources :course do
     resources :lessons, only: [:new, :create, :edit, :update] do
+      get '/choose_exercise'  =>  'lessons#choose_exercise',        as: 'choose_exercise'
+      post '/add_exercise'    =>  'lessons#add_exercise',           as: 'add_exercise'
     end
   end
 
