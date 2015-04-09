@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20150405212316) do
   create_table "assignments", force: :cascade do |t|
     t.integer  "student_id"
     t.integer  "lesson_id"
-    t.text     "response"
+    t.text     "response" #TODO remove THIS
     t.date     "due_date"
     t.time     "due_time"
     t.date     "submit_date"
@@ -44,12 +44,12 @@ ActiveRecord::Schema.define(version: 20150405212316) do
     t.integer  "internal_id"
     t.string   "semester"
     t.string   "year"
-    t.string   "instructor_ids"
+    t.string   "instructor_ids" #TODO delete
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
 
-  create_table "exercises", force: :cascade do |t|
+  create_table "exercises", force: :cascade do |t| #TODO add key
     t.string   "exercise_code"
     t.integer  "forvo_id"
     t.text     "content"

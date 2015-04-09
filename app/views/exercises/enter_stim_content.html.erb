@@ -1,1 +1,11 @@
-enter_stim_content.html.erb
+<h2>Enter the stimulus for your exercise here </h2>
+
+<%= form_tag exercise_update_stim_content_path do %>
+<%= label_tag :content, "Enter the text the student should speak or read here: " %>
+<%= text_field_tag :content %>
+<br>
+<%= label_tag :answer_key, "Type the correct response for this exercise here: " %>
+<%= text_field_tag :answer_key %>
+<% end %>
+
+<%= render 'ipa_keyboard' %>
