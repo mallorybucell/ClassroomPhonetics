@@ -1,0 +1,17 @@
+<% #TODO make a partial or fold into pick_audio %>
+<table class="table table-striped">
+  <tbody>
+  <% @audio_choices.each do |choice| %>
+    <tr>
+      <td><%= Audio.format_forvo_js_for_insert(choice["id"]) %></td>
+      <td>
+        <%= form_tag audios_path do %>
+          <%= hidden_field_tag "data", choice.to_json %>
+          <button>Add Audio to Exercise</button>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+

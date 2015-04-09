@@ -5,49 +5,35 @@ class ExercisesController < ApplicationController
   #TODO protect flow so have to follow- can't just curl in to step if prev not completedf
   def new
     @exercise = Exercise.new
+    @options = Exercise.content_types_and_explanation
   end
 
   def create
       #TODO params security
-    if  @_current_exercise = current_user.create_exercise(params[:description])
-        @_current_exercise = @_current_exercise
-        flash[:notice]= "New exercise created. Please choose a type for this exercise."
-        redirect_to exercise_choose_type_path(lesson.id)
+    if  @_current_exercise = current_user.create_exercise(params[:exercise][:exercise_code])
+        flash[:notice] = "New exercise created. Please choose a type for this exercise."
+        redirect_to redirect_by_exercise_type
     else
-      flash[:notice] = "Something went wrong. Please try again."
+      flash[:alert] = "Something went wrong. Please try again." #TODO consolidate this
       render :new
     end
   end
 
-  def choose_type
+  def pick_audio
     @_current_exercise
-
-    #TODO enum type??
-    #opt show stem if ajax enabled
   end
 
-  def add_type
-    if @_current_exercise.update!(exercise_code: params[:e_code])
-      @_current_exercise = @_current_exercise
-      flash[:notice] = "Exercise type updated successfully." 
-      redirect_to redirect_by_exercise_type
-    else
-      flash[:notice] = "Something went wrong. Please try again." #TODO consolidate this
-      render :type
-    end
-  end
-
-  def select_audio
-    @_current_exercise
+  def preview_audio
+    render :preview_audio
   end
 
   def update_audio
     #TODO make this a method on Forvo_Api for storing data
     if @_current_exercise.update!(forvo_id: params[:forvo_id], word: params[:word], lang_code: params[:lang_code], speaker_gender: params[:speaker_gender], audio_source: params[:audio_source], added_by_teacher_id: current_user.id, forvo_data: params[:forvo_data])
-      @_current_exercise = @_current_exercise
+     flash[:notice]
       redirect_to redirect_by_exercise_type
     else
-      flash[:notice] = "Something went wrong. Please try again."
+      flash[:alert] = "Something went wrong. Please try again."
       render :audio
     end
   end
@@ -83,11 +69,15 @@ class ExercisesController < ApplicationController
 
   def authenticate_exercise_owner!
     #TODO security
-    raise User::UnauthorizedError unless Exercise.find(params["id"].to_i).created_by_teacher_id == current_user.id
+    raise User::UnauthorizedError unless Exercise.find(params["exercise_id"].to_i).created_by_teacher_id == current_user.id
   end
 
   def redirect_by_exercise_type
-    fail
+    if @_current_exercise.exercise_code == "L-WI"
+      exercise_pick_audio_path(@_current_exercise.id)
+    else
+      exercise_enter_stim_content_path(@_current_exercise.id)
+    end
   end
 
 end

@@ -7,8 +7,5 @@ class ForvoApi
     HTTParty.get("http://apifree.forvo.com/key/#{ENV['FORVO_API_KEY']}/format/json/action/word-pronunciations/word/#{word}/language/en/limit/#{limit}")
   end
 
-  def self.store_audio_id
-  end
-
 
 end

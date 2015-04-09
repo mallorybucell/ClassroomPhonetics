@@ -4,14 +4,20 @@
 </div>
 <br>
 <h3>Step 1</h3>
-<div id="exercise-code">
-  <!-- drop down here -->
-</div>
+<p class="lead">Select the type of exercise you would like to create.</p>
 
-<% #TODO ajax %>
-<!-- if ajax enabled, show stem when selected above -->
-<div id="stem">
-  <!-- #Load stem text based on type and preview? -->
+
+<div id="exercise-code">
+  <%= form_for @exercise, url: exercises_path do |f| %>
+  <% #TODO static field showing course? %>
+  <%=f.label :exercise_code, "Exercise type: " %>
+  <%=f.select :exercise_code, options_for_select(@options)  %>
+  <br>
+  <div id="audio-prompt">
+  <p></p>
+  </div>
+  <button>Make New Exercise</button>
+<% end %>
 </div>
 
 
@@ -35,3 +41,4 @@
   <p>Enter default language text for student to read</p>
 </div>
 <!-- save content at each stage? -->
+

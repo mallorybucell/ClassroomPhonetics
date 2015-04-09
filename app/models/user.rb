@@ -14,8 +14,8 @@ class User < ActiveRecord::Base
     l
   end
 
-  def create_exercise(description)
-    Exercise.create!(description: description, created_by_teacher_id: self.id)
+  def create_exercise(ex_code)
+    Exercise.create!(exercise_code: ex_code, created_by_teacher_id: self.id)
   end
 
   def user_course_teacher?(course_id)

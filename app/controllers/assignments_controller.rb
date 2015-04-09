@@ -3,6 +3,10 @@ class AssignmentsController < ApplicationController
     @assignment = Assignment.new
   end
 
+  def confirm
+    fail
+  end
+
   def create
     #pull this out to model
     #get course students
@@ -14,15 +18,6 @@ class AssignmentsController < ApplicationController
       flash[:notice] = "Something whent wrong, please try again."
       render :new
     end
-  end
-
-  def edit
-  end
-
-  def update
-  end
-
-  def destroy
   end
 
 end
