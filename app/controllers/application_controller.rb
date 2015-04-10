@@ -6,7 +6,16 @@ class ApplicationController < ActionController::Base
 
   def home
   end
-  
-  #TODO Rescue from Std Error
-  #TODO Rescue from User::UnauthorizedError
+
+  rescue_from StandardError do |e|
+      flash[:alert] = "Oops! Something went wrong. Please try again."
+      redirect_to :back
+  end
+
+  rescue_from User::UnauthorizedError do |e|
+    sign_out current_user
+    flash[:alert] = "You are not authorized to view this page"
+    redirect_to new_user_session_path
+  end
+
 end
