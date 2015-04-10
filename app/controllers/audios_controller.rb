@@ -9,7 +9,9 @@ class AudiosController < ApplicationController
   def create
     binding.pry
     #TODO
-    Audio.create!()
+    # if Audio.create!()
+    #   redirect_to 
+    # end
   end
 
   def create_self_audio

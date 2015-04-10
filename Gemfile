@@ -17,8 +17,7 @@ gem 'activesupport'
 gem 'slim-rails'
 gem 'httparty'
 
-gem 'fog'
-gem 'carrierwave'
+gem 'aws-sdk-rails'
 
 group :development, :test do
   gem 'spring'
