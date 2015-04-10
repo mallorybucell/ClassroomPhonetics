@@ -4,10 +4,15 @@
 <% #TODO: Support for adding multiple exercises %>
   Choose an exercise to add to the lesson:
   <br>
+  <% if @exercises != [] || nil %>
   <%=label_tag :exercise_id, "Exercise:" %>
   <%=select_tag :exercise_id, options_from_collection_for_select(@exercises, :id, :description) %>
   <br>
   <button>Add Exercise to Lesson</button>
+  <% else %>
+  <p>You have not created any exercises.</p>
+  <%= link_to "Create an exercise to start.", new_exercise_path %>
+  <% end %>
 <% end %>
 </div>
 <br>

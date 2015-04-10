@@ -6,7 +6,8 @@ class LessonsController < ApplicationController
 
   def new
     @lesson = Lesson.new
-    @courses = Course.all
+    @courses = current_user.courses
+    @exercises = Exercise.where(created_by_teacher_id: current_user.id)
   end
 
   def create
@@ -59,11 +60,6 @@ class LessonsController < ApplicationController
     #TODO
   end
 
-  # def return_words
-  #   response = Forvo.get_word_pronunciations('cat', '3')
-  #   #check_or_add_to forvo table
-  #   head :ok
-  # end
 
   private
     def lesson_params #TODO: FIX create function to take this (user func takes 2 args OR pass in params more securely

@@ -3,7 +3,8 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable 
+         #TODO remove registerable
 
   has_many :assignments
   has_many :user_courses
@@ -19,7 +20,7 @@ class User < ActiveRecord::Base
   end
 
   def user_course_teacher?(course_id)
-    self.user_courses.where(course_id: course_id).first.user_role == "teacher"
+    self.user_courses.where(course_id: course_id.to_i).first.user_role == "teacher"
   end
 
 end
