@@ -3,6 +3,7 @@ class LessonsController < ApplicationController
   before_action :authenticate_lesson_owner!, except: [:new, :create]
   before_action :lookup_lesson, except: [:new, :create]
   #TODO make sure lesson cannot be assigned without exercises
+  #TODO make sure lesson can't be updated if part of ongoing assignment
 
   def new
     @lesson = Lesson.new
@@ -37,6 +38,7 @@ class LessonsController < ApplicationController
   def choose_exercise
     @lesson_exercise = LessonExercise.new
     @lesson = lookup_lesson
+    session[:lesson_id] = @lesson.id
     @exercises = Exercise.where(created_by_teacher_id: current_user.id)
     @assignment = Assignment.new
   end
@@ -74,7 +76,8 @@ class LessonsController < ApplicationController
 
   def authenticate_lesson_owner!
     #TODO security
-    raise User::UnauthorizedError unless Lesson.find(params[:lesson_id].to_i).created_by_teacher_id == current_user.id
+    raise User::UnauthorizedError unless lookup_lesson
+    .created_by_teacher_id == current_user.id
   end
 
   def lookup_lesson

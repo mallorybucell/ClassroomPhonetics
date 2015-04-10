@@ -10,9 +10,8 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended that you check this file into your version control system.
-#TODO Validations
 
-ActiveRecord::Schema.define(version: 20150405212316) do
+ActiveRecord::Schema.define(version: 20150410041953) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "student_id"
@@ -52,7 +51,7 @@ ActiveRecord::Schema.define(version: 20150405212316) do
 
   create_table "exercises", force: :cascade do |t|
     t.string   "exercise_code"
-    t.integer  "forvo_id" #audio ID and add answer key string, answer rationale
+    t.integer  "forvo_id"
     t.text     "content"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
@@ -77,6 +76,18 @@ ActiveRecord::Schema.define(version: 20150405212316) do
     t.datetime "updated_at",            null: false
     t.string   "description"
   end
+
+  create_table "responses", force: :cascade do |t|
+    t.integer  "assignment_id"
+    t.integer  "exercise_id"
+    t.text     "feedback"
+    t.integer  "feedbacker_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "responses", ["assignment_id"], name: "index_responses_on_assignment_id"
+  add_index "responses", ["exercise_id"], name: "index_responses_on_exercise_id"
 
   create_table "user_courses", force: :cascade do |t|
     t.integer  "user_id"

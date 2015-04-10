@@ -2,16 +2,17 @@
 <div class="container">
 <%= form_tag lesson_add_exercise_path(@lesson) do |f| %>
 <% #TODO: Support for adding multiple exercises %>
-  Choose an exercise to add to the lesson:
+  Add an existing exercise to this lesson:
   <br>
   <% if @exercises != [] || nil %>
-  <%=label_tag :exercise_id, "Exercise:" %>
+  <%=label_tag :exercise_id, "Exercise: " %>
   <%=select_tag :exercise_id, options_from_collection_for_select(@exercises, :id, :description) %>
   <br>
   <button>Add Exercise to Lesson</button>
+  <br>
+  <%= link_to "Create a new exercise", new_exercise_path %>
   <% else %>
   <p>You have not created any exercises.</p>
-  <%= link_to "Create an exercise to start.", new_exercise_path %>
   <% end %>
 <% end %>
 </div>

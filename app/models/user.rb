@@ -15,8 +15,20 @@ class User < ActiveRecord::Base
     l
   end
 
-  def create_exercise(ex_code)
+  def create_exercise!(ex_code)
     Exercise.create!(exercise_code: ex_code, created_by_teacher_id: self.id)
+  end
+
+  def create_audio!(forvo_id: nil, word: nil, lang_code: nil, speaker_gender: nil, forvo_data: nil, audio_source: nil)
+    Audio.create!(
+      forvo_id: forvo_id,
+      word: word,
+      lang_code: lang_code,
+      speaker_gender: speaker_gender,
+      forvo_data: forvo_data,
+      added_by_teacher_id: self.id,
+      audio_source: audio_source
+      )
   end
 
   def user_course_teacher?(course_id)
