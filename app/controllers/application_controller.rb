@@ -5,12 +5,18 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!, except: [:home]
 
   def home
+    if current_user
+      redirect_to dashboard_path
+    else
+      render :home
+    end
   end
+  
+  # rescue_from StandardError do |e|
+  #     flash[:alert] = "Oops! Something went wrong. Please try again."
+  #     redirect_to :back
+  # end
 
-  rescue_from StandardError do |e|
-      flash[:alert] = "Oops! Something went wrong. Please try again."
-      redirect_to :back
-  end
 
   rescue_from User::UnauthorizedError do |e|
     sign_out current_user

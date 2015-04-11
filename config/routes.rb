@@ -37,5 +37,5 @@ Rails.application.routes.draw do
 
   end
 
-  # get '/return_words' => 'lessons#return_words'
+  resource :dashboard, only: [:show]
 end

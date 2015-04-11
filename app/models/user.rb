@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
          #TODO remove registerable
 
   has_many :assignments
+  has_many :lessons
   has_many :user_courses
   has_many :courses, through: :user_courses
 
@@ -33,6 +34,10 @@ class User < ActiveRecord::Base
 
   def user_course_teacher?(course_id)
     self.user_courses.where(course_id: course_id.to_i).first.user_role == "teacher"
+  end
+
+  def get_lessons
+    Lesson.where(created_by_teacher_id: self.id)
   end
 
 end
