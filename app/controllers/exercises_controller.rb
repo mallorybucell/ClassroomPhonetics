@@ -12,7 +12,7 @@ class ExercisesController < ApplicationController
       #TODO params security
     if  current_exercise = current_user.create_exercise!(params[:exercise][:exercise_code])
         session[:current_exercise_id] = current_exercise.id
-        flash[:notice] = "New exercise created. Please choose a type for this exercise."
+        flash[:notice] = "New exercise started. Please continue entering the exercise content."
         redirect_to redirect_by_exercise_type
     else
       flash[:alert] = "Something went wrong. Please try again." #TODO consolidate this
@@ -44,9 +44,10 @@ class ExercisesController < ApplicationController
   end
 
   def update_stim_content
-   if get_exercise_from_session.update!(content: params[:content])
+    @exercise = get_exercise_from_session
+   if @exercise.update!(content: params[:content], answer_key: params[:answer_key], description: @exercise.create_description(params[:answer_key]) )
+      flash[:notice] = "Exercise '#{get_exercise_from_session.description}' created and saved! You can now add it to a lesson."
       session[:current_exercise_id] = nil
-      flash[:notice] = "Exercise created and saved!"
       redirect_to lesson_choose_exercise_path(session[:lesson_id])
       session[:lesson_id] = nil
     else
@@ -58,10 +59,6 @@ class ExercisesController < ApplicationController
  private
   def exercise_params #TODO: FIX create function to take this (user func takes 2 args OR pass in params more securely
     params.require(:lesson).permit(:course_id, :description)
-  end
-
-  def get_exercise_from_session
-    Exercise.find(session[:current_exercise_id].to_i)
   end
 
   def audio_params

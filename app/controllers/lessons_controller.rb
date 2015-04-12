@@ -1,7 +1,7 @@
 class LessonsController < ApplicationController
   before_action :authenticate_teacher!
-  before_action :authenticate_lesson_owner!, except: [:new, :create]
-  before_action :lookup_lesson, except: [:new, :create]
+  before_action :authenticate_lesson_owner!, except: [:new, :create, :index]
+  before_action :lookup_lesson, except: [:new, :create, :index]
   #TODO make sure lesson cannot be assigned without exercises
   #TODO make sure lesson can't be updated if part of ongoing assignment
 
@@ -14,12 +14,16 @@ class LessonsController < ApplicationController
   def create
     lesson = current_user.create_lesson!(params[:lesson][:course_id], params[:lesson][:description]) #lesson_params)
     if lesson != nil
-      flash[:notice] = "Lesson created successfully!"
+      flash[:notice] = "Lesson started and saved!"
       redirect_to lesson_choose_exercise_path(lesson.id)
     else
-      flash[:notice] = "Something went wrong. Please try again."
+      flash[:alert] = "Something went wrong. Please try again."
       render :new
     end
+  end
+
+  def index
+    @lessons = current_user.lessons
   end
 
   def show
@@ -45,11 +49,12 @@ class LessonsController < ApplicationController
 
   def add_exercise #remove exercise
     @lesson = lookup_lesson
-    if LessonExercise.create!(lesson_id: params[:lesson_id], exercise_id: params[:exercise_id])
-      flash[:notice] = "Exercise added!"
+    @exercise = Exercise.find(params[:exercise_id])
+    if LessonExercise.create!(lesson_id: @lesson.id, exercise_id: @exercise.id)
+      flash[:notice] = "Exercise '#{@exercise.description}' added to Lesson '#{@lesson.description}'!"
       redirect_to lesson_choose_exercise_path(@lesson)
     else
-      flash[:notice] = "Something went wrong. Please try again."
+      flash[:alert] = "Something went wrong. Please try again."
       render :choose_exercise
     end
   end

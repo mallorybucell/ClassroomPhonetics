@@ -4,7 +4,7 @@
 </div>
 <br>
 <h3>Step 1</h3>
-<p class="lead">Select the type of exercise you would like to create.</p>
+<p class="lead">Select task you would like the student to do:</p>
 
 
 <div id="exercise-code">
@@ -13,10 +13,7 @@
   <%=f.label :exercise_code, "Exercise type: " %>
   <%=f.select :exercise_code, options_for_select(@options)  %>
   <br>
-  <div id="audio-prompt">
-  <p></p>
-  </div>
-  <button>Make New Exercise</button>
+<button>Make New Exercise</button>
 <% end %>
 </div>
 

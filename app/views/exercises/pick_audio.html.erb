@@ -1,19 +1,23 @@
 
 <h2>Add audio to your exercise</h3>
 
+<p>In this exercise, the student will: <%= Exercise.task_hash[@_current_exercise.exercise_code] %>. </p>
+
 <h3>Find audio using Forvo</h3>
 <div id="forvo-audio-params">
 <%= form_tag get_from_forvo_path do %>
-<%= label_tag :word %>
-<%= text_field_tag :word %>
+<%= label_tag :word, "Enter a word: " %>
+<%= text_field_tag :word, nil, :required => true %>
 <br>
-<%= label_tag :limit %>
+<%= label_tag :limit, "Choose the number of pronunciations to return: " %>
 <% numbers = (1..10).to_a %>
 <%= select_tag :limit, options_for_select(numbers, selected: nil) %>
 <br>
 <button>Get Options from Forvo</button>
 <% end %>
 </div>
+
+<h3>Use Audio from the Database</h3>
 
 
 <h3>Record your own audio</h3>

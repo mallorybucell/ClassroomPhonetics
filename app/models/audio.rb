@@ -11,6 +11,10 @@ class Audio < ActiveRecord::Base
     "<script type=\"text/javascript\" src=\"http://www.forvo.com/_ext/ext-prons.js?id=#{forvo_id.to_s}\" charset=\"utf-8\"></script>".html_safe
   end
 
+  def filename
+    "#{self.id.to_s}-#{self.word}"
+  end
+
   def lang_code_hash
     #TODO
   end

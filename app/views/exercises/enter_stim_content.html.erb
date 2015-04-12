@@ -1,15 +1,17 @@
-<h2>Enter the stimulus for your exercise here </h2>
+<h2>Add the Question Text and Correct Answer </h2>
 
-<%= form_tag exercise_update_stim_content_path do %>
+<p>The student will: <%= Exercise.task_hash[@_current_exercise.exercise_code] %>.</p>
+
+<%= form_tag exercise_update_stim_content_path(@_current_exercise) do %>
 <% unless @_current_exercise.exercise_code == "L-WI" %>
-  <%= label_tag :content, "Enter the text the student should speak or read here: " %>
+  <%= label_tag :content, "Type the text the student should speak or read here: " %>
   <%= text_field_tag :content %>
 <% end %>
 <br>
 <%= label_tag :answer_key, "Type the correct response for this exercise here: " %>
 <%= text_field_tag :answer_key %>
 <br>
-<button>Update Exercise!</button>
+<button>Submit Exercise!</button>
 <% end %>
 
 <%= render 'ipa_keyboard' %>

@@ -5,7 +5,7 @@ class Lesson < ActiveRecord::Base
   has_many    :exercises
   has_many    :exercises, through: :lesson_exercises
 
-  validates_presence_of :course
+  validates_presence_of :course, :description
 
 
 end

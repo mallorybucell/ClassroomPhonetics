@@ -14,10 +14,10 @@ Rails.application.routes.draw do
 
 
 
-  resources :lessons, only: [:new, :create, :show, :edit, :update] do
+  resources :lessons, only: [:new, :create, :show, :index, :edit, :update] do
     get '/choose_exercise'  =>  'lessons#choose_exercise',        as: 'choose_exercise'
     post '/add_exercise'    =>  'lessons#add_exercise',           as: 'add_exercise'
-    post '/remove_exercise' =>  'lessons#remove_exercise',        as: 'remove_exercise' 
+    patch '/remove_exercise' =>  'lessons#remove_exercise',        as: 'remove_exercise' 
   end
 
   scope '/assignments' do
@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     post '/confirm' => 'assignments#confirm',   as: 'confirm'
   end
 
-  resources :exercises, only: [:new, :create, :edit, :update] do
+  resources :exercises, only: [:new, :create, :edit, :update, :show, :index] do
     get   '/pick_audio'            =>  'exercises#pick_audio',            as: 'pick_audio'
     post  '/preview_audio'         =>  'exercises#previw_audio',           as: 'preview_audio' 
     post  '/update_audio'          =>  'exercises#update_audio',           as: 'update_audio'

@@ -12,16 +12,22 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  protected
+
   # rescue_from StandardError do |e|
   #     flash[:alert] = "Oops! Something went wrong. Please try again."
   #     redirect_to :back
   # end
 
 
-  rescue_from User::UnauthorizedError do |e|
-    sign_out current_user
-    flash[:alert] = "You are not authorized to view this page"
-    redirect_to new_user_session_path
+    rescue_from User::UnauthorizedError do |e|
+      sign_out current_user
+      flash[:alert] = "You are not authorized to view this page"
+      redirect_to new_user_session_path
+    end
+
+  def get_exercise_from_session
+    Exercise.find(session[:current_exercise_id].to_i)
   end
 
 end

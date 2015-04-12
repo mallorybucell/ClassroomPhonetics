@@ -2,10 +2,10 @@
 
 <%= form_for @lesson, url: lessons_path do |f| %>
   <% #TODO static field showing course? %>
-  <%=f.label :description, "Lesson Description" %>
+  <%=f.label :description, "Lesson Description: " %>
   <%=f.text_field :description %>
   <br>
-  <%=f.label :course_id, "Course:" %>
+  <%=f.label :course_id, "Course: " %>
   <%=f.select :course_id, options_from_collection_for_select(@courses, 'id', 'course_name') %>
   <br>
   <button>Make New Lesson</button>

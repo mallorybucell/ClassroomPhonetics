@@ -5,7 +5,7 @@ class DashboardsController < ApplicationController
       teacher_dash_info
       render :teacher
     elsif current_user.admin?
-      #TODO
+      #TODO admin/course routes and controllers
       render :admin
     else
       student_dash_info
@@ -18,7 +18,7 @@ class DashboardsController < ApplicationController
     def student_dash_info
       get_dash_assignments
       @current_courses = current_user.courses
-      @current_activities = "Coming soon"
+      @current_activities = "Coming soon" #TODO current_activities
     end
 
     def teacher_dash_info
@@ -45,8 +45,5 @@ class DashboardsController < ApplicationController
       @past_assignments #= fail
     end
 
-    def get_course_roster 
-      #TODO lookup course
-      @roster = course.users
-    end
+
 end

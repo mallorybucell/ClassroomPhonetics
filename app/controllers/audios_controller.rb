@@ -8,14 +8,15 @@ class AudiosController < ApplicationController
 
   def create
     data = JSON.parse(params[:data])
+    @exercise = get_exercise_from_session
     if audio = current_user.create_audio!(forvo_id: data["id"], word: data["word"].downcase, lang_code: data["code"], speaker_gender: data["sex"], forvo_data: params[:data], audio_source: "forvo" )
       #TODO fix amazon upload
-      AmazonS3Api.upload_forvo_to_bucket("#{audio.id}-#{audio.word}", data["pathogg"])
-      session[:current_exercise_id] = audio.id
-      flash[:notice] = "Audio successfully added to lesson!"
-      redirect_to exercise_enter_stim_content_path(session[:current_exercise_id])
+      AmazonS3Api.upload_forvo_to_bucket(audio.filename, data["pathogg"])
+      flash[:notice] = "Audio '#{audio.filename}' successfully added to exercise '#{@exercise.id}"
+      redirect_to exercise_enter_stim_content_path(@exercise)
     else
-      #FIXME
+      flash[:alert] = "Oops! We couldn't add that audio to exercise '#{@exercise.id}. Please try again."
+      render :choose_forvo
     end
 
   end
