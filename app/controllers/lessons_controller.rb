@@ -1,7 +1,7 @@
 class LessonsController < ApplicationController
   before_action :authenticate_teacher!
   before_action :authenticate_lesson_owner!, except: [:new, :create, :index, :show] #TODO- need different validation for show b/c lesson not in session at this point
-  before_action :lookup_lesson, except: [Ï:new, :create, :index, :show]
+  before_action :lookup_lesson, except: [:new, :create, :index, :show]
   #TODO make sure lesson cannot be assigned without exercises
   #TODO make sure lesson can't be updated if part of ongoing assignment
 
@@ -34,8 +34,7 @@ class LessonsController < ApplicationController
   end
 
   def edit
-    #Description only
-    #TODO
+    #exercises only?
   end
 
   def update
@@ -71,12 +70,13 @@ class LessonsController < ApplicationController
 
 
   private
+  #TODO ask James about args hash w/strong params vs this
     def lesson_params #TODO: FIX create function to take this (user func takes 2 args OR pass in params more securely
       params.require(:lesson).permit(:course_id, :description)
     end
 
   def authenticate_lesson_owner!
-    #TODO security
+    #TODO SecureCompare
     raise User::UnauthorizedError unless (lookup_lesson.created_by_teacher_id == current_user.id)
   end
 

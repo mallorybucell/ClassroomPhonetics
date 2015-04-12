@@ -31,7 +31,7 @@ class ExercisesController < ApplicationController
   def update_audio
     #TODO make this a method on Forvo_Api for storing data
     if get_exercise_from_session.update!(forvo_id: params[:forvo_id], word: params[:word], lang_code: params[:lang_code], speaker_gender: params[:speaker_gender], audio_source: params[:audio_source], added_by_teacher_id: current_user.id, forvo_data: params[:forvo_data])
-     flash[:notice]
+      flash[:notice] = "Audio saved and added to exercise."
       redirect_to redirect_by_exercise_type
     else
       flash[:alert] = "Something went wrong. Please try again."

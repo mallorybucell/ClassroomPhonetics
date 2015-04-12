@@ -15,16 +15,17 @@ This is the preview page for lesson <%= @lesson.id %>, <%=@lesson.description %>
 </table>
 
 
-<div class="container">
+<div class="container" id="create-assignment">
 <h3>Set Lesson as an Individual Assignment</h3>
 <%= form_for @assignment, url: assignments_path do |f| %>
   <% #TODO static field showing course? %>
   <%=f.label :due_date, "Due Date: " %>
   <%=f.date_field :due_date %>
   <br>
-  <%=f.label :due_time, "Due time: (note: default is midnight)." %>
-  <%=f.time_field :due_time %>
+  <p>Note: default closing time for assignment is midnight of the due date.</p>
   <br>
+  <%=hidden_field_tag :course_id, @lesson.course_id %>
+  <%=hidden_field_tag :lesson_id, @lesson.id %>
   <button>Set Assignment</button>
 <% end %>
 </div>

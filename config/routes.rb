@@ -28,9 +28,7 @@ Rails.application.routes.draw do
     resources :responses
   end
 
-  resource :assignments, only: [:new, :create] do
-    post '/confirm' => 'assignments#confirm',   as: 'confirm'
-  end
+  resource :assignments, only: [:new, :create]
 
   resources :exercises, only: [:new, :create, :edit, :update, :show, :index] do
     get   '/pick_audio'            =>  'exercises#pick_audio',            as: 'pick_audio'

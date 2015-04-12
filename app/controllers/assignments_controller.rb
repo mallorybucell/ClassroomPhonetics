@@ -1,23 +1,27 @@
 class AssignmentsController < ApplicationController
+  before_action :authenticate_teacher!
+
   def new
     @assignment = Assignment.new
   end
 
-  def confirm
-    fail
-  end
-
   def create
-    #pull this out to model
-    #get course students
-    #for each student, make an assignment
-    if Assignment.create!(student_id: params["student_id"], lesson_id: params["lesson_id"], due_date: params["due_date"], due_time: params["due_time"], assigned_by: params["teacher_id"])
-      flash[:notice] = "Lesson assigned to students in #{course_name}" #TODO
+    @course = Course.find(params["course_id"].to_i)
+    students = lookup_course_students
+    if students.each do |student|
+      Assignment.set!(student.id, params["lesson_id"].to_i, params["assignment"]["due_date"], current_user.id)
+      end
+      flash[:notice] = "Lesson assigned to students in #{@course.course_name}"
       render :new
     else
       flash[:notice] = "Something whent wrong, please try again."
       render :new
     end
   end
+
+  private
+    def lookup_course_students
+      @course.get_roster
+    end
 
 end
