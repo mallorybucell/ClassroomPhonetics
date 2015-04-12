@@ -28,6 +28,8 @@ class LessonsController < ApplicationController
 
   def show
     @lesson = lookup_lesson
+    @exercises = @lesson.get_exercises
+    @assignment = Assignment.new
   end
 
   def edit
@@ -44,7 +46,6 @@ class LessonsController < ApplicationController
     @lesson = lookup_lesson
     session[:lesson_id] = @lesson.id
     @exercises = Exercise.where(created_by_teacher_id: current_user.id)
-    @assignment = Assignment.new
   end
 
   def add_exercise #remove exercise
@@ -86,7 +87,7 @@ class LessonsController < ApplicationController
   end
 
   def lookup_lesson
-    Lesson.find(params[:lesson_id].to_i)
+    Lesson.find(session[:lesson_id].to_i)
   end
 
 

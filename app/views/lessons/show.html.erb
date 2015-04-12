@@ -1,1 +1,30 @@
-This is a show page for lesson <%= @lesson.id %>, <%=@lesson.description %>
+This is the preview page for lesson <%= @lesson.id %>, <%=@lesson.description %>
+
+<table>
+  <tbody>
+    <% @exercises.each do |ex| %>
+    <tr>
+      <td><%= ex.stem_text_hash_lookup %></td>
+    </tr>
+    <tr>
+      <td><%= ex.content %></td>
+    </tr>
+    <tr><td><br><input type="text" /></td></tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<div class="container">
+<h3>Set Lesson as an Individual Assignment</h3>
+<%= form_for @assignment, url: assignments_path do |f| %>
+  <% #TODO static field showing course? %>
+  <%=f.label :due_date, "Due Date: " %>
+  <%=f.date_field :due_date %>
+  <br>
+  <%=f.label :due_time, "Due time: (note: default is midnight)." %>
+  <%=f.time_field :due_time %>
+  <br>
+  <button>Set Assignment</button>
+<% end %>
+</div>

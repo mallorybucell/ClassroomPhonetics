@@ -5,8 +5,12 @@ class Exercise < ActiveRecord::Base
   def create_exercise(exercise_code)
   end
 
-  def stem_text_hash
+  def self.stem_text_hash
     { "L-WI" => "Listen to the recording. Then write IPA to record what you hear in the space provided.", "RI-W" => "Which English word does this IPA notation record?", "R-WI" => "Write this word in IPA notation.", "RI-S" => "Record yourself speaking aloud the word or sounds recorded in this IPA notation."}
+  end
+
+  def stem_text_hash_lookup
+    Exercise.stem_text_hash[self.exercise_code]
   end
 
   def create_description(answer)

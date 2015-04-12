@@ -17,21 +17,9 @@
 <% end %>
 </div>
 <br>
-<div class="container">
-<h3>Set Lesson as an Individual Assignment</h3>
-<%= form_for @assignment, url: assignments_path do |f| %>
-  <% #TODO static field showing course? %>
-  <%=f.label :due_date, "Due Date: " %>
-  <%=f.date_field :due_date %>
-  <br>
-  <%=f.label :due_time, "Due time: (note: default is midnight)." %>
-  <%=f.time_field :due_time %>
-  <br>
-  <button>Set Assignment</button>
-<% end %>
-</div>
 <br>
 <div class="container">
+<%= link_to "Preview or Use Lesson for Course", lesson_path(@lesson) %>
 <%= link_to "Back to Dashboard", root_path %>
 <br>
 <% #TODO select activity or assignment type upon creation %>
