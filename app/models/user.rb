@@ -12,8 +12,7 @@ class User < ActiveRecord::Base
   has_many :courses, through: :user_courses
 
   def create_lesson!(course_id, description)
-    l = Lesson.create!(course_id: course_id, created_by_teacher_id: self.id, description: description) if self.user_course_teacher?(course_id)
-    l
+    Lesson.create!(course_id: course_id, created_by_teacher_id: self.id, description: description) if self.teaches_course?(course_id)
   end
 
   def create_exercise!(ex_code)
@@ -32,12 +31,22 @@ class User < ActiveRecord::Base
       )
   end
 
-  def user_course_teacher?(course_id)
-    self.user_courses.where(course_id: course_id.to_i).first.user_role == "teacher"
+  def teacher?
+    self.teacher
+  end
+
+  def admin?
+    self.admin
+  end
+
+  def teaches_course?(course_id)
+    self.courses.include?(Course.find(course_id.to_i))
   end
 
   def get_lessons
     Lesson.where(created_by_teacher_id: self.id)
   end
+
+
 
 end

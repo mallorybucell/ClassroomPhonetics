@@ -3,8 +3,12 @@ Rails.application.routes.draw do
   
   root 'application#home'
 
-  resources :course do
+  resources :courses
+  
+  resource :course, shallow: true do
+    get '/teacher_index' =>'courses#teacher_index', as: 'teacher_index'
   end
+
 
   resources :audios, only: [:create] do
   end

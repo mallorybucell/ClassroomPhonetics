@@ -17,6 +17,15 @@
     <div class="navbar-right">
       <%= button_to " Sign Out", destroy_user_session_path, method: :delete %>
     </div>
+    <div class="navbar">
+    <% if current_user.admin? %>
+      <%= render 'admin_nav' %>
+    <% elsif current_user.teacher? %>
+      <%= render 'teacher_nav' %>
+    <% else %>
+      <%= render 'student_nav' %>
+    <% end %>
+  </div>
   <% else %>
     <%= link_to " | Sign In ", new_user_session_path %>
   <% end %>

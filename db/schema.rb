@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20150412153433) do
     t.integer  "internal_id"
     t.string   "semester"
     t.string   "year"
-    t.string   "instructor_ids"
+    t.string   "instructor_ids" #FIXME remove this
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 20150412153433) do
   create_table "user_courses", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "course_id"
-    t.string   "user_role"
+    t.string   "user_role" #FIXME Delete
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

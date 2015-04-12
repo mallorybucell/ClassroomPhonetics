@@ -1,9 +1,8 @@
 <h1>Create a new lesson</h1>
-
 <%= form_for @lesson, url: lessons_path do |f| %>
   <% #TODO static field showing course? %>
   <%=f.label :description, "Lesson Description: " %>
-  <%=f.text_field :description %>
+  <%=f.text_field :description, :required => true  %>
   <br>
   <%=f.label :course_id, "Course: " %>
   <%=f.select :course_id, options_from_collection_for_select(@courses, 'id', 'course_name') %>

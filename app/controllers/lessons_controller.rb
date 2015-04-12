@@ -1,7 +1,7 @@
 class LessonsController < ApplicationController
   before_action :authenticate_teacher!
-  before_action :authenticate_lesson_owner!, except: [:new, :create, :index]
-  before_action :lookup_lesson, except: [:new, :create, :index]
+  before_action :authenticate_lesson_owner!, except: [:new, :create, :index, :show] #TODO- need different validation for show b/c lesson not in session at this point
+  before_action :lookup_lesson, except: [Ï:new, :create, :index, :show]
   #TODO make sure lesson cannot be assigned without exercises
   #TODO make sure lesson can't be updated if part of ongoing assignment
 
@@ -12,13 +12,14 @@ class LessonsController < ApplicationController
   end
 
   def create
-    lesson = current_user.create_lesson!(params[:lesson][:course_id], params[:lesson][:description]) #lesson_params)
-    if lesson != nil
+    lesson = current_user.create_lesson!(params['lesson']['course_id'], params['lesson']['description']) #lesson_params
+    if lesson != 
+      session[:lesson_id] = lesson.id
       flash[:notice] = "Lesson started and saved!"
       redirect_to lesson_choose_exercise_path(lesson.id)
     else
       flash[:alert] = "Something went wrong. Please try again."
-      render :new
+      redirect_to :back
     end
   end
 
@@ -27,7 +28,7 @@ class LessonsController < ApplicationController
   end
 
   def show
-    @lesson = lookup_lesson
+    @lesson = lookup_lesson ||= Lesson.find(params[:id].to_i)
     @exercises = @lesson.get_exercises
     @assignment = Assignment.new
   end
@@ -74,16 +75,9 @@ class LessonsController < ApplicationController
       params.require(:lesson).permit(:course_id, :description)
     end
 
-  def authenticate_teacher!
-    raise User::UnauthorizedError unless current_user.teacher?
-    #TODO change user_role to enum
-    #TODO define UnauthorizedError
-  end
-
   def authenticate_lesson_owner!
     #TODO security
-    raise User::UnauthorizedError unless lookup_lesson
-    .created_by_teacher_id == current_user.id
+    raise User::UnauthorizedError unless (lookup_lesson.created_by_teacher_id == current_user.id)
   end
 
   def lookup_lesson

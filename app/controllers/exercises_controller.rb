@@ -49,7 +49,6 @@ class ExercisesController < ApplicationController
       flash[:notice] = "Exercise '#{get_exercise_from_session.description}' created and saved! You can now add it to a lesson."
       session[:current_exercise_id] = nil
       redirect_to lesson_choose_exercise_path(session[:lesson_id])
-      session[:lesson_id] = nil
     else
       flash[:notice] = "Something went wrong. Please try again."
       render :content
@@ -63,12 +62,6 @@ class ExercisesController < ApplicationController
 
   def audio_params
     fail #TODO
-  end
-
-  def authenticate_teacher!
-    raise User::UnauthorizedError unless current_user.teacher?
-    #TODO change user_role to enum
-    #TODO define UnauthorizedError
   end
 
   def authenticate_exercise_owner!
