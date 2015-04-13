@@ -3,10 +3,9 @@
     <%= menu_item "View Current Courses ", teacher_index_course_path %>
     <%= drop_down "Manage Lessons " do %>
       <%= menu_item "Lessons Main", lessons_path %>
-      <%= menu_item "Give Feedback" %>
       <%= menu_item "Assign a Lesson" %>
       <% end %>
-    <%= menu_item "Manage Exercises", exercises_path %>
+    <%= menu_item "Manage Feedback", exercises_path %>
     <%= menu_item "Manage Preferences", exercises_path %>
   <% end %>
 <% end %>
