@@ -24,7 +24,7 @@ class LessonsController < ApplicationController
   end
 
   def index
-    @lessons = current_user.lessons
+    @assignments = current_user.lessons
   end
 
   def show
