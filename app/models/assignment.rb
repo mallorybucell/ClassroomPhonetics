@@ -6,7 +6,7 @@ class Assignment < ActiveRecord::Base
     Assignment.create!(
       student_id: student_id, 
       lesson_id: lesson_id, 
-      due_date: due_date, 
+      due_date: due_date, #FIXME Datetime.parse this
       assigned_by: teacher_id 
       )
   end

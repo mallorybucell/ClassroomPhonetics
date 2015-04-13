@@ -18,6 +18,7 @@ gem 'slim-rails'
 gem 'httparty'
 
 gem 'aws-sdk-rails'
+gem 'twitter-bootstrap-rails'
 
 group :development, :test do
   gem 'spring'
