@@ -1,23 +1,11 @@
+<div class="container">
 <%= render 'lesson_modal' %>
 
 <h3>Your Lessons</h3>
-<table class='table table-hover'>
-  <thead>
-    <th>Lesson Title</th>
-    <th>Due</th>
-    <th>Assigned to </th>
-    <th>Submitted?</th>
-  </thead>
-  <tbody>
-    <% @assignments.each do |a| %>
-    <tr>
-    <td><%= a.lesson.description%></td><td><%=distance_of_time_in_words(a.due_at, Time.now) %> <%= a.get_relative %></td><td></td><td></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+
 
 <h3><%= link_to "Make a new lesson", new_lesson_path %></h3>
+</div>
 <!-- <h2>Edit existing lesson</h2>
 <p>You can make changes to any lesson, as long as it is not currently active as an assignment or activity.</p> -->
 <!-- <h2>In-progress lessons</h2>

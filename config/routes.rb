@@ -24,11 +24,13 @@ Rails.application.routes.draw do
     patch '/remove_exercise' =>  'lessons#remove_exercise',        as: 'remove_exercise' 
   end
 
-  scope '/assignments' do
-    resources :responses
-  end
 
-  resource :assignments, only: [:new, :create]
+  resource :assignment, only: [ :new, :create, :show]
+
+  # scope '/assignments' do
+  #   resources :responses
+  # end
+
 
   resources :exercises, only: [:new, :create, :edit, :update, :show, :index] do
     get   '/pick_audio'            =>  'exercises#pick_audio',            as: 'pick_audio'

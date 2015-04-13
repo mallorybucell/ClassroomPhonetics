@@ -12,11 +12,15 @@ class AssignmentsController < ApplicationController
       Assignment.set!(student.id, params["lesson_id"].to_i, params["assignment"]["due_at"], current_user.id)
       end
       flash[:notice] = "Lesson assigned to students in #{@course.course_name}"
-      render :new
+      redirect_to assignments_path
     else
       flash[:notice] = "Something whent wrong, please try again."
       render :new
     end
+  end
+
+  def show
+    @assignments = Assignment.where(assigned_by: current_user.id).includes(:lesson)
   end
 
   private
