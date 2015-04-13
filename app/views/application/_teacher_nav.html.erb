@@ -1,13 +1,15 @@
-<div class="navigation">
-  <% #TODO Course Path %>
-  <ul class="h-nav">
-    <li><%= link_to "View Current Courses ", teacher_index_course_path %></li>
-    <li><%= link_to "Manage Lessons ", lessons_path %>
-    <ul>
-      <li>Give Feedback</li>
-      <li>Assign a Lesson</li>
-    </ul></li>
-    <li> <%= link_to "Manage Exercises", exercises_path %></li>
-    <li>Manage Preferences</li>
-  </ul>
-</div>
+<%= nav_bar do %>
+  <%= menu_group pull: :left do %>
+    <%= menu_item "View Current Courses ", teacher_index_course_path %>
+    <%= drop_down "Manage Lessons " do %>
+      <%= menu_item "Lessons Main", lessons_path %>
+      <%= menu_item "Give Feedback" %>
+      <%= menu_item "Assign a Lesson" %>
+      <% end %>
+    <%= menu_item "Manage Exercises", exercises_path %>
+    <%= menu_item "Manage Preferences", exercises_path %>
+  <% end %>
+<% end %>
+
+
+   
