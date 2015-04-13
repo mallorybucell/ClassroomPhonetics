@@ -1,0 +1,26 @@
+  <div class="row">
+    <div class="col-lg-6 col-lg">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">IPA Entry Guide</h3>
+                    <span class="pull-right">
+                        <!-- Tabs -->
+                        <ul class="nav panel-tabs">
+                            <li class="active"><a href="#tab1" data-toggle="tab">Pulmonic Consonants</a></li>
+                            <li><a href="#tab2" data-toggle="tab">Non-Pulmonic Consonants</a></li>
+                            <li><a href="#tab3" data-toggle="tab">Vowels</a></li>
+                            <li><a href="#tab4" data-toggle="tab">Affricates and Other Symbols</a></li>
+                        </ul>
+                    </span>
+                </div>
+                <div class="panel-body">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab1"><%= render 'ipa_keys_consonant_ref' %></div>
+                        <div class="tab-pane" id="tab2"><%= render 'ipa_keys_np_consonant_ref' %></div>
+                        <div class="tab-pane" id="tab3"><%= render 'ipa_keys_vowels_ref' %></div>
+                        <div class="tab-pane" id="tab4"><%= render 'ipa_keys_other_ref' %></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+  </div>

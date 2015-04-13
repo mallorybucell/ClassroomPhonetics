@@ -1,3 +1,4 @@
+
 <h2>Add the Question Text and Correct Answer </h2>
 
 <p>The student will: <%= Exercise.task_hash[@_current_exercise.exercise_code] %>.</p>
@@ -13,5 +14,9 @@
 <br>
 <button>Submit Exercise!</button>
 <% end %>
-
+<br>
+<div class="container">
+  <%= render 'ipa_ref_tabs' %>
+</div>
 <%= render 'ipa_keyboard' %>
+
