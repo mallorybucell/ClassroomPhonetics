@@ -1,5 +1,7 @@
-<h1>Create a New Exercise Here</h1>
-
+<div class="container">
+  <ul class="breadcrumb">
+    <li class="active">Select Task</li>
+  </ul>
 <div id="type-explanations">
 </div>
 <br>
@@ -7,35 +9,17 @@
 <p class="lead">Select task you would like the student to do:</p>
 
 
-<div id="exercise-code">
-  <%= form_for @exercise, url: exercises_path do |f| %>
-  <% #TODO static field showing course? %>
-  <%=f.label :exercise_code, "Exercise type: " %>
-  <%=f.select :exercise_code, options_for_select(@options)  %>
-  <br>
-<button>Make New Exercise</button>
-<% end %>
-</div>
+  <div id="exercise-code">
+    <%= form_for @exercise, url: exercises_path do |f| %>
+    <% #TODO static field showing course? %>
+    <%=f.label :exercise_code, "Exercise type: " %>
+    <%=f.select :exercise_code, options_for_select(@options)  %>
+    <br>
+  <button>Make New Exercise</button>
+  <% end %>
+  </div>
 
-
 <br>
-<h3>Step 2</h3>
-<p class="lead">If you chose to add an "L-" exercise type, please select audio below:</p>
-<div id="audio-picker">
-  <p>Get audio from Forvo</p>
-  <p>Record your own Audio</p>
-</div>
-<br>
-<h3>Step 3</h3>
-<p class="lead">If you chose to add an "RI-" exercise type, please enter your IPA below:</p>
-<div id="reading-stim">
-  <p>Enter IPA text for student to read</p>
-</div>
-<br>
-<h3>Step 4</h3>
-<p class="lead">If you chose to add an "R-" exercise type, please add it here</p>
-<div id="lang-orthog-stim">
-  <p>Enter default language text for student to read</p>
 </div>
 <!-- save content at each stage? -->
 

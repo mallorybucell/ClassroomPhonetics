@@ -24,7 +24,7 @@ class LessonsController < ApplicationController
   end
 
   def index
-    @assignments = current_user.lessons
+    @assignments = Assignment.where(assigned_by: current_user.id).includes(:lesson)
   end
 
   def show

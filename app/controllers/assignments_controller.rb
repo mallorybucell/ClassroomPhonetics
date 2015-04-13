@@ -9,7 +9,7 @@ class AssignmentsController < ApplicationController
     @course = Course.find(params["course_id"].to_i)
     students = lookup_course_students
     if students.each do |student|
-      Assignment.set!(student.id, params["lesson_id"].to_i, params["assignment"]["due_date"], current_user.id)
+      Assignment.set!(student.id, params["lesson_id"].to_i, params["assignment"]["due_at"], current_user.id)
       end
       flash[:notice] = "Lesson assigned to students in #{@course.course_name}"
       render :new

@@ -1,13 +1,17 @@
 <%= render 'lesson_modal' %>
 
 <h3>Your Lessons</h3>
-<table>
+<table class='table table-hover'>
   <thead>
+    <th>Lesson Title</th>
+    <th>Due</th>
+    <th>Assigned to </th>
+    <th>Submitted?</th>
   </thead>
   <tbody>
-    <%= @lessons.each do |lesson| %>
+    <% @assignments.each do |a| %>
     <tr>
-    <td></td><td></td><td></td>
+    <td><%= a.lesson.description%></td><td><%=distance_of_time_in_words(a.due_at, Time.now) %> <%= a.get_relative %></td><td></td><td></td>
     </tr>
     <% end %>
   </tbody>

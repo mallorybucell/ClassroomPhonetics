@@ -11,14 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150412153433) do
+ActiveRecord::Schema.define(version: 20150413092310) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "student_id"
     t.integer  "lesson_id"
     t.text     "response"
-    t.date     "due_date"
-    t.time     "due_time"
+    t.datetime "due_at"
     t.date     "submit_date"
     t.time     "submit_time"
     t.integer  "assigned_by"
@@ -44,7 +43,7 @@ ActiveRecord::Schema.define(version: 20150412153433) do
     t.integer  "internal_id"
     t.string   "semester"
     t.string   "year"
-    t.string   "instructor_ids" #FIXME remove this
+    t.string   "instructor_ids"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
@@ -93,7 +92,7 @@ ActiveRecord::Schema.define(version: 20150412153433) do
   create_table "user_courses", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "course_id"
-    t.string   "user_role" #FIXME Delete
+    t.string   "user_role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

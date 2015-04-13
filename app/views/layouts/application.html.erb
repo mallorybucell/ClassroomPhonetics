@@ -2,7 +2,6 @@
 <html>
 <head>
   <title>ToClassroomPhonetics</title>
-<!--   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet"> -->
   <%= stylesheet_link_tag    'application', media: 'all'%>
 
   <%= javascript_include_tag 'application' %>
@@ -10,7 +9,7 @@
 </head>
 <div class="container">
 <body>
-  <div class="container">
+  <% if current_user %>
     <% if current_user.admin? %>
       <%= render 'admin_nav' %>
     <% elsif current_user.teacher? %>
@@ -18,18 +17,21 @@
     <% else %>
       <%= render 'student_nav' %>
     <% end %>
-  </div>
+  <% end %>
   <br>
-  <div class="container">
   <% flash.each do |flash_type, message| %>
     <div class="alert alert-<%= translate_to_bootstrap flash_type %>">
       <%= message %>
-    </div>
   <% end %>
-
-  <%= yield %>
   </div>
+  <%= yield %>
 
+  <!-- footer -->
+  <div class="container">
+    <div class="well-foot">
+      Look, I'm in a well!
+    </div>
+  </div>
 </body>
 </div>
 </html>

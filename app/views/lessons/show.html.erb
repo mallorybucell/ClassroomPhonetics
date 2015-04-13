@@ -19,8 +19,8 @@ This is the preview page for lesson <%= @lesson.id %>, <%=@lesson.description %>
 <h3>Set Lesson as an Individual Assignment</h3>
 <%= form_for @assignment, url: assignments_path do |f| %>
   <% #TODO static field showing course? %>
-  <%=f.label :due_date, "Due Date: " %>
-  <%=f.date_field :due_date %>
+  <%=f.label :due_at, "Due On: " %>
+  <%=f.date_field :due_at %>
   <br>
   <p>Note: default closing time for assignment is midnight of the due date.</p>
   <br>
