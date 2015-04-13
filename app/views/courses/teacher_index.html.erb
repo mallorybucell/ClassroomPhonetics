@@ -1,14 +1,14 @@
 <div class="container container-md">
-<% #TODO: display course name, number of students, open assignments %>
-<% @courses.each do |c| %>
-<div class="list-group">
-  <a href="#" class="list-group-item active">
-  Course One
-  </a>
-  <a href="#" class="list-group-item"><span class="badge">12</span>Dapibus ac facilisis in
-  </a>
-  <a href="#" class="list-group-item"><span class="badge">2</span>Morbi leo risus
-  </a>
-</div>
-
+  <% #TODO: display course name, number of students, open assignments %>
+  <% @courses.each do |c| %>
+  <div class="list-group">
+    <a href="#" class="list-group-item active">
+    <%= c.course_name %>
+    </a>
+    <a href="#" class="list-group-item"><span class="badge"><%= c.get_roster.count%></span>Total Students enrolled
+    </a>
+    <a href="#" class="list-group-item"><span class="badge"><%= c.get_open_assignments.count %></span>Open Assignments
+    </a>
+  </div>
+<% end %>
 </div>
