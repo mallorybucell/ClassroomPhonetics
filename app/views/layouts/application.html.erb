@@ -17,6 +17,8 @@
     <% else %>
       <%= render 'student_nav' %>
     <% end %>
+  <% else %>
+    <% link_to "Log In", new_user_session_path %>
   <% end %>
   <br>
   <% flash.each do |flash_type, message| %>

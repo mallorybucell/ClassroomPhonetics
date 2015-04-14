@@ -9,22 +9,22 @@
         <span class="icon-bar"></span>
       </button>
       <span><a class="navbar-brand" href="<%= root_path %>">LingLearn: [lIŋlɛrn]</a>
-      <p class="active"> <%= current_user.email %></p></span>
+      <p class="lead"> <%= current_user.email %></p></span>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
       <ul class="nav navbar-nav">
 
     <%= menu_item "Current Courses ", teacher_index_course_path %>
-    <%= drop_down "Manage Lessons " do %>
-      <%= menu_item "Lessons Main", lessons_path %>
-      <%= menu_item "Assign a Lesson" %>
+    <%= drop_down "Lessons & Assignments " do %>
+      <%= menu_item "Lessons Main ", lessons_path %>
+      <%= menu_item "Assignments Main ", assignments_path %>
       <% end %>
-    <%= menu_item "Manage Feedback", assignment_path %>
+    <%= menu_item "Manage Feedback", exercises_path %>
     <%= menu_item "Manage Preferences", exercises_path %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= button_to " Sign Out", destroy_user_session_path, method: :delete %></li>
+        <li><%= button_to " Sign Out", destroy_user_session_path, method: :delete, class: 'btn btn-link' %></li>
       </ul>
     </div>
   </div>

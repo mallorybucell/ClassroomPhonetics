@@ -11,18 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150413092310) do
+ActiveRecord::Schema.define(version: 20150414110019) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "student_id"
     t.integer  "lesson_id"
-    t.text     "response"
     t.datetime "due_at"
-    t.date     "submit_date"
-    t.time     "submit_time"
+    t.datetime "submitted_at"
     t.integer  "assigned_by"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   add_index "assignments", ["lesson_id"], name: "index_assignments_on_lesson_id"
@@ -84,6 +82,7 @@ ActiveRecord::Schema.define(version: 20150413092310) do
     t.integer  "feedbacker_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.string   "content"
   end
 
   add_index "responses", ["assignment_id"], name: "index_responses_on_assignment_id"

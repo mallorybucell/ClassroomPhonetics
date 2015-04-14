@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="panel panel-info">
+    <div class="panel-heading">
+    <h3 class="panel-title">Lessons Assigned</h3>
+    </div>
+    <div class="panel-body">
+      <table class='table table-hover'>
+        <thead>
+          <th>Lesson Assigned</th>
+          <th>Current Status</th>
+          <th>Due</th>
+        </thead>
+        <tbody>
+          <% @lessons.each do |lesson| %>
+          <% l = Lesson.find(lesson.lesson_id); a = l.assignments.first %>
+          <tr>
+            <td><%= l.description%></td><td><%= a.current_status %></td><td><%=distance_of_time_in_words(a.due_at, Time.now) %> <%= a.get_relative %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title">Assignments by Student</h3>
+    </div>
+    <div class="panel-body">
+      <table class='table table-hover'>
+        <thead>
+          <th>Assignment ID</th>
+          <th>Lesson Assigned</th>
+          <th>Due</th>
+          <th>Assigned to </th>
+          <th>Submitted?</th>
+        </thead>
+        <tbody>
+          <% @assignments.each do |a| %>
+          <tr>
+            <td><%= a.id %>
+            <td><%= a.lesson.description%></td><td><%=distance_of_time_in_words(a.due_at, Time.now) %> <%= a.get_relative %></td><td><%= a.student.email %></td><td><%= a.is_submitted %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

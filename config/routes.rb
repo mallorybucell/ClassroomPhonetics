@@ -25,7 +25,9 @@ Rails.application.routes.draw do
   end
 
 
-  resource :assignment, only: [ :new, :create, :show]
+  resources :assignments, only: [ :new, :create, :show, :index] do
+  end
+  
 
   # scope '/assignments' do
   #   resources :responses

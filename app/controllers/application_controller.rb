@@ -30,6 +30,10 @@ class ApplicationController < ActionController::Base
     raise User::UnauthorizedError unless current_user.teacher?
   end
 
+  def authenticate_student!
+    raise User::UnauthorizedError unless current_user.student?
+  end
+
   def verify_admin!
     raise User::UnauthorizedError unless current_user.admin?
   end

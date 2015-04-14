@@ -1,5 +1,7 @@
 class AssignmentsController < ApplicationController
   before_action :authenticate_teacher!
+  before_action :validate_lesson!
+  before_action :authenticate_student!, only: [:show]
 
   def new
     @assignment = Assignment.new
@@ -12,20 +14,33 @@ class AssignmentsController < ApplicationController
       Assignment.set!(student.id, params["lesson_id"].to_i, params["assignment"]["due_at"], current_user.id)
       end
       flash[:notice] = "Lesson assigned to students in #{@course.course_name}"
-      redirect_to assignments_path
+      redirect_to assignment_path
     else
-      flash[:notice] = "Something whent wrong, please try again."
-      render :new
+      flash[:notice] = e || "Something whent wrong, please try again."
+      redirect_to lesson_path(params["lesson_id"])
     end
   end
 
   def show
-    @assignments = Assignment.where(assigned_by: current_user.id).includes(:lesson)
+  end
+
+  def index
+    @assignments = Assignment.where(assigned_by: current_user.id).includes([:lesson]) #TODO, why does :user include only pull current_user- devise??
+    @lessons = get_lessons_from_assignments
   end
 
   private
     def lookup_course_students
       @course.get_roster
+    end
+
+    def validate_lesson!
+      Lesson.find(params["lesson_id"]).exercises.count >= 1
+      rescue StandardError => e
+    end
+
+    def get_lessons_from_assignments
+      @assignments.select(:lesson_id).distinct
     end
 
 end

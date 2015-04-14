@@ -6,6 +6,7 @@ class Lesson < ActiveRecord::Base
   has_many    :exercises, through: :lesson_exercises
 
   validates_presence_of :course, :description
+  validates_uniqueness_of :description
 
   def get_exercises
     self.exercises
