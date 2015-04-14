@@ -1,34 +1,60 @@
-This is the preview page for lesson <%= @lesson.id %>, <%=@lesson.description %>
-Add a back link
-Add show course lesson belongs to??
-Add show due_date
-<table>
-  <tbody>
-    <% @exercises.each do |ex| %>
-    <tr>
-      <td><%= ex.stem_text_hash_lookup %></td>
-    </tr>
-    <tr>
-      <td><%= ex.content %></td>
-    </tr>
-    <tr><td><br><input type="text" /></td></tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="container">
+  <p class="lead">This is the preview page for lesson <%= @lesson.id %></p>
 
+  <h2> '<%=@lesson.description %>'</h2>
 
-<div class="container" id="create-assignment">
-<h3>Set Lesson as an Individual Assignment</h3>
-<%= form_for @assignment, url: assignment_path do |f| %>
-  <% #TODO static field showing course? %>
-  <%=f.label :due_at, "Due On: " %>
-  <%=f.date_field :due_at, :required => true %>
+  <table>
+    <tbody>
+      <% @exercises.each do |ex| %>
+      <tr>
+        <td><%= ex.stem_text_hash_lookup %></td>
+      </tr>
+      <tr>
+        <td><%= ex.content %></td>
+      </tr>
+      <tr><td><br><input type="text" /></td></tr>
+      <% end %>
+    </tbody>
+  </table>
   <br>
-  <p>Note: default closing time for assignment is midnight of the due date.</p>
-  <br>
-  <%=hidden_field_tag :course_id, @lesson.course_id %>
-  <%=hidden_field_tag :lesson_id, @lesson.id %>
-  <button>Set Assignment</button>
-<% end %>
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingTwo">
+        <h4 class="panel-title">
+          <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" onclick="init()">
+            Set Lesson as an Individual Assignment
+          </a>
+        </h4>
+      </div>
+      <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+        <div class="panel-body">
+        <p>Setting lesson as an assignment for each student in the course: <strong><h6><%= @lesson.course.course_name %></h6></strong></p>
+          <div class="container" id="create-assignment">
+            <%= form_for @assignment, url: assignments_path do |f| %>
+            <% #TODO static field showing course? %>
+            <%=f.label :due_at, "Due On: " %>
+            <%=f.date_field :due_at, :required => true %>
+            <br>
+            <p>Note: default closing time for assignment is midnight of the due date.</p>
+            <br>
+            <%=hidden_field_tag :course_id, @lesson.course_id %>
+            <%=hidden_field_tag :lesson_id, @lesson.id %>
+            <button>Set Assignment</button>
+            <% end %>
 
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingOne">
+        <h4 class="panel-title">
+          <%= link_to "Back to Lessons Main", lessons_path %>
+        </h4>
+      </div>
+    </div>
+  </div>
 </div>
+
+

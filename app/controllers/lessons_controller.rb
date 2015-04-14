@@ -24,11 +24,11 @@ class LessonsController < ApplicationController
   end
 
   def index
-    @lessons = Lesson.where(created_by_teacher_id: current_user.id).includes(:course)
+    @lessons = Lesson.where(created_by_teacher_id: current_user.id).includes([:course]).first
   end
 
   def show
-    @lesson = lookup_lesson ||= Lesson.find(params[:id].to_i)
+    @lesson = lookup_lesson ||= Lesson.where(id: params[:id].to_i).includes([:course]).first!
     @exercises = @lesson.get_exercises
     @assignment = Assignment.new
   end
@@ -81,7 +81,7 @@ class LessonsController < ApplicationController
   end
 
   def lookup_lesson
-    Lesson.find(session[:lesson_id].to_i)
+    Lesson.where(id: session[:lesson_id].to_i).includes(:course).first!
   end
 
 

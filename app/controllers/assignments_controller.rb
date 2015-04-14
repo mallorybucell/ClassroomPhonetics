@@ -8,13 +8,14 @@ class AssignmentsController < ApplicationController
   end
 
   def create
+    #TODO: validate can't set same assignment with same due date on same course
     @course = Course.find(params["course_id"].to_i)
     students = lookup_course_students
     if students.each do |student|
       Assignment.set!(student.id, params["lesson_id"].to_i, params["assignment"]["due_at"], current_user.id)
       end
       flash[:notice] = "Lesson assigned to students in #{@course.course_name}"
-      redirect_to assignment_path
+      redirect_to lesson_path(params["lesson_id"])
     else
       flash[:notice] = e || "Something whent wrong, please try again."
       redirect_to lesson_path(params["lesson_id"])
