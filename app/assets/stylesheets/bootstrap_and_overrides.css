@@ -7314,6 +7314,15 @@ input[type="checkbox"]:disabled:checked:after,
 
 }
 
+/*toggle panel*/
+.toggle-header{
+    padding:10px 0;
+    margin:10px 0;
+    background-color:purple;
+    color:white;
+}
+
+
 @import url("//fonts.googleapis.com/css?family=Roboto:300,400,500,700");
 /*!
  * bootswatch v3.3.4+1

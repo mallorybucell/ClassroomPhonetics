@@ -29,6 +29,7 @@ class ExercisesController < ApplicationController
   end
 
   def update_audio
+    #TODO validate so lesson can only have one audio? Or explicit pick # of files
     #TODO make this a method on Forvo_Api for storing data
     if get_exercise_from_session.update!(forvo_id: params[:forvo_id], word: params[:word], lang_code: params[:lang_code], speaker_gender: params[:speaker_gender], audio_source: params[:audio_source], added_by_teacher_id: current_user.id, forvo_data: params[:forvo_data])
       flash[:notice] = "Audio saved and added to exercise."
