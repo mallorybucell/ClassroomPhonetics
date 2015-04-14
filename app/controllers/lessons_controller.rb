@@ -24,7 +24,7 @@ class LessonsController < ApplicationController
   end
 
   def index
-    @lessons = Lesson.where(created_by_teacher_id: current_user.id).includes([:course]).first
+    @lessons = Lesson.where(created_by_teacher_id: current_user.id).includes([:course])
   end
 
   def show

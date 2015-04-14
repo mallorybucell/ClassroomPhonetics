@@ -9,6 +9,7 @@ class AssignmentsController < ApplicationController
 
   def create
     #TODO: validate can't set same assignment with same due date on same course
+    #students will never be false if not nil (all/any?)
     @course = Course.find(params["course_id"].to_i)
     students = lookup_course_students
     if students.each do |student|
