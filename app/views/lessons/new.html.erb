@@ -1,12 +1,14 @@
 <div class= "container">
-<h3>Create a new lesson</h3>
+<h4>Create a new lesson</h4>
 <%= form_for @lesson, url: lessons_path do |f| %>
   <% #TODO static field showing course? %>
   <label for="lesson_description" data-toggle="tooltip" data-placement="top" title="" data-original-title="Enter a short title or description fo this lesson">Lesson Description: </label>
   <%=f.text_field :description, :required => true  %>
   <br>
+  <br>
   <%=f.label :course_id, "Course: " %>
   <%=f.select :course_id, options_from_collection_for_select(@courses, 'id', 'course_name') %>
+  <br>
   <br>
   <button>Make New Lesson</button>
 <% end %>
