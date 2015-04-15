@@ -1,5 +1,4 @@
-_sound_chart.html.erb<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet"> -->
-<%= stylesheet_link_tag "DoulosSILR" %>
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet"> -->
 
 <!--
 International Phonetic Alphabet Chart in Unicode and XHTML/CSS
@@ -19,10 +18,11 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 -->
+
     <div id="chart">
     <h1 id="title">The International Phonetic Alphabet <span id="alphabetRevision">(revised to 2005)</span></h1>
     
-    <div id="pulmonicConsonants">
+    <div id="pulmonicConsonants" class="container">
     <h2>Consonants (Pulmonic)</h2>
     <table>
       <!--<caption>Where symbols appear in pairs, the one to the right
@@ -276,11 +276,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
       </tbody>
     </table>
     <p>Where symbols appear in pairs, the one to the right represents a
-    voiced consonant. Shaded areas denote articulations judged
+    voiced consonant.</p>
+    <p> Shaded areas denote articulations judged
     impossible.</p>
     </div>
     
-    <div id="nonPulmonicConsonants">
+    <div id="nonPulmonicConsonants" class="container">
     <h2>Consonants (Non-Pulmonic)</h2>
     <table>
       <colgroup span="2" />
@@ -339,7 +340,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
     </table>
     </div>
     
-    <div id="vowels">
+    <div id="vowels" class="container">
     <h2>Vowels</h2>
     <div id="vowelQuadrilateral">
       <div id="vowelLabels">
@@ -408,7 +409,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
     <p class='caption'>Where symbols appear in pairs, the one to the right represents a rounded vowel.</p>
     </div>
     
-    <div id="otherSymbols">
+    <div id="otherSymbols" class="container">
     <h2>Other Symbols and Afficates</h2>
     <table>
       <colgroup>
@@ -501,11 +502,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
     <div id="footer">
       <hr />
       <p> Forked and modified from <a href="https://github.com/westonruter/ipa-chart/issues" target="_top">Weston Ruter's IPA Keyboard Chart</a>. Play sound version found at <a href="https://github.com/mallorybucell/ipa-chart/">Mallory Bucell's github</a>.</p>
-      
-      <div id='footerBoilerplate'>
-      <div id='copyright'>The <!--<a href="http://www.arts.gla.ac.uk/IPA/ipa.html">-->International
+      <p>The <!--<a href="http://www.arts.gla.ac.uk/IPA/ipa.html">-->International
       Phonetic Association<!--</a>--> is the copyright owner of the
-      International Phonetic Alphabet and the IPA chart.
-      The code is copyright &copy; 2004-2009, Weston Ruter. Modified 2015 &copy; Mallory Bucell.</div>
-      </div>
+      International Phonetic Alphabet and the IPA chart.</p>
+      <p> he code is copyright &copy; 2004-2009, Weston Ruter. Modified 2015 &copy; Mallory Bucell.</p>
     </div>
+  </div>
