@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
+ruby '2.2.0'
+#Address warnings so not USE webrick
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
