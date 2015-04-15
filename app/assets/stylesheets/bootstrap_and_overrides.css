@@ -5717,7 +5717,7 @@ button.close {
   -webkit-appearance: none;
 }
 .modal-open {
-  overflow: hidden;
+  overflow: visible !important;
 }
 .modal {
   display: none;
@@ -7356,6 +7356,7 @@ input[type="checkbox"]:disabled:checked:after,
 
 .vspaced {
   margin-bottom:10px;
+  overflow: visible !important;
 }
 
 
