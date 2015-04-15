@@ -1,7 +1,7 @@
 class AudiosController < ApplicationController
 #TODO: check forvo auth token
   def get_forvo_audio
-    audio_choices = ForvoApi.get_word_pronunciations(params[:word], params[:limit])
+    audio_choices = ForvoApi.get_word_pronunciations(params[:word], params[:limit]) #if verify forvo
     if audio_choices.code >= 500 && audio_choices.code < 600
       flash[:warning] = "Sorry, Forvo is down right now. You could record your own audio or use existing audio, or just try again later."
       redirect_to :back

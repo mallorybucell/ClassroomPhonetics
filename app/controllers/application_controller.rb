@@ -39,7 +39,8 @@ class ApplicationController < ActionController::Base
   end
 
   def get_exercise_from_session
-    Exercise.find(session[:current_exercise_id].to_i)
+   return Exercise.find(session[:current_exercise_id].to_i) if !Exercise.find(session[:current_exercise_id].to_i).nil?
+   return Exercise.find(params[:exercise_id].to_i) if !Exercise.find(params[:exercise_id].to_i).nil?
   end
 
 end

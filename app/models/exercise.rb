@@ -7,7 +7,7 @@ class Exercise < ActiveRecord::Base
 
   def self.stem_text_hash
     { "L-WI" => "Listen to the recording. Then write IPA to record what you hear in the space provided.", 
-      "RI-W" => "Which English word does this IPA notation record?", 
+      "RI-W" => "Write the English word that this IPA notation records.", 
       "R-WI" => "Write this word in IPA notation.", 
       "RI-S" => "Record yourself speaking aloud the word or sounds recorded in this IPA notation."
     }
