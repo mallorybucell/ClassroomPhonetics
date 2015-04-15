@@ -10,9 +10,9 @@
         <div class="panel-body">
           <table class="table table-striped-hover">
             <thead>
-              <th>Description</th>
-              <th>Course</th>
-              <th>Date Created</th>
+              <th><%= link_to sortable "description" %></th>
+              <th><%= link_to sortable "course_id", "Course" %></th>
+              <th><%= link_to sortable "created_at", "Date Created" %></th>
             </thead>
             <tbody>
               <% @lessons.each do |l| %>

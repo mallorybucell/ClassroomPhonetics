@@ -45,4 +45,8 @@ class AssignmentsController < ApplicationController
       @assignments.select(:lesson_id).distinct
     end
 
+    def sort_column
+      Assignment.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    end
+
 end

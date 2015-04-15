@@ -43,4 +43,8 @@ class ApplicationController < ActionController::Base
    return Exercise.find(params[:exercise_id].to_i) if !Exercise.find(params[:exercise_id].to_i).nil?
   end
 
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
+  end
+
 end
