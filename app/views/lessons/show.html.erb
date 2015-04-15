@@ -1,23 +1,15 @@
 <div class="container">
-  <p class="lead">This is the preview page for lesson <%= @lesson.id %></p>
+    <div class="pull-right">
+      <div id="sidebar" data-spy="affix" data-offset-top="60" data-offset-bottom="200">
+        <ul class="list-inline">
+          <li class="btn btn-group"><%= render 'ipa_ref_tabs' %></li>
+          <li class="btn btn-group"><%= render 'ipa_sound_ref' %></li>
+        </ul>
+      </div>
+    </div>
 
-  <h2> '<%=@lesson.description %>'</h2>
-
-  <table>
-    <tbody>
-      <% @exercises.each do |ex| %>
-      <tr>
-        <td><%= ex.stem_text_hash_lookup %></td>
-      </tr>
-      <tr>
-        <td><%= ex.content %></td>
-      </tr>
-      <tr><td><br><input type="text" /></td></tr>
-      <% end %>
-    </tbody>
-  </table>
-  <br>
   <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="col col-md">
     <div class="panel panel-default">
       <div class="panel-heading" role="tab" id="headingTwo">
         <h4 class="panel-title">
@@ -31,7 +23,6 @@
         <p>Setting lesson as an assignment for each student in the course: <strong><h6><%= @lesson.course.course_name %></h6></strong></p>
           <div class="container" id="create-assignment">
             <%= form_for @assignment, url: assignments_path do |f| %>
-            <% #TODO static field showing course? %>
             <%=f.label :due_at, "Due On: " %>
             <%=f.date_field :due_at, :required => true %>
             <br>
@@ -50,11 +41,37 @@
     <div class="panel panel-default">
       <div class="panel-heading" role="tab" id="headingOne">
         <h4 class="panel-title">
+          <%= link_to "Add Exercise to Lesson", lesson_choose_exercise_path(@lesson) %>
+        </h4>
+      </div>
+    </div>
+       <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingOne">
+          <h4 class="panel-title">
           <%= link_to "Back to Lessons Main", lessons_path %>
         </h4>
       </div>
     </div>
+    </div>
   </div>
+
+  <br>
+    <div class="col">
+      <p class="lead">This is the preview page for lesson <%= @lesson.id %></p>
+    </div>
+
+
+  <h2> '<%=@lesson.description %>'</h2>
+
+  <table>
+    <tbody>
+      <% @exercises.each do |ex| %>
+        <% @ex = ex %>
+        <%= render exercise_layout_hash[@ex.exercise_code] %>
+      <% end %>
+    </tbody>
+  </table>
+  
 </div>
 
 

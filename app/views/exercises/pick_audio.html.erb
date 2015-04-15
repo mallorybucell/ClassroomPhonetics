@@ -127,7 +127,7 @@
           // __log('Audio context set up.');
           // __log('navigator.getUserMedia ' + (navigator.getUserMedia ? 'available.' : 'not present!'));
         } catch (e) {
-          alert('No web audio support in this browser!');
+          alert('You must allow this program to use your microphone to use the record audio feature. Click allow by the nav bar to enable. );
         }
         
         navigator.getUserMedia({audio: true}, startUserMedia, function(e) {

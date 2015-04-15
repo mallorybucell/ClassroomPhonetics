@@ -1,0 +1,12 @@
+<tr><td> </td></tr>
+<tr>
+  <td class='stem'><%= @ex.stem_text_hash_lookup %></td>
+</tr>
+<tr>
+</tr>
+  <tr><td><%= Audio.display!(@ex) %></td></tr>
+<tr>
+</tr>
+<tr><td><%= text_field_tag :response %></td></tr>
+<tr><td><%= render 'ipa_keyboard' %></td></tr>
+<tr><td><hr class="hr-primary" /> </td></tr>
