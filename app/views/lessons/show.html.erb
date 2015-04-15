@@ -1,10 +1,12 @@
 <div class="container">
 
-  <div data-spy="affix" data-offset-top="60" data-offset-bottom="200">
-    <div id="sidebar">
-      <div class='pull-right'><%= render 'ipa_sound_ref' %></div>
+    <div class="pull-right">
+      <div id="sidebar" data-spy="affix" data-offset-top="60" data-offset-bottom="200">
+          <div class="vspaced"><%= render 'ipa_ref_tabs' %></div>
+         <div class="vspaced"><%= render 'ipa_sound_ref' %></div>
     </div>
-  </div>
+    </div>
+
 
   <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
   <div class="col col-md">
