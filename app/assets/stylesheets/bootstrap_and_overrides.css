@@ -7332,29 +7332,6 @@ input[type="checkbox"]:disabled:checked:after,
   padding: 10px 0px 19px 0px !important;
 }
 
-/*sidebar floats*/
-@media (min-width: 979px) {
-  #sidebar.affix-top {
-    position: static;
-    right:0;
-    margin-top:25px;
-    width:228px;
-  }
-  
-  #sidebar.affix {
-    position: fixed;
-    right:0;
-    top:25px;
-    width:228px;
-  }
-}
-
-.affix,.affix-top {
-   position:static;
-   right:0;
-}
-
-
 
 @import url("//fonts.googleapis.com/css?family=Roboto:300,400,500,700");
 /*!
