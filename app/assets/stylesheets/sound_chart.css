@@ -42,37 +42,30 @@
 	display:none;
 }
 
-body {
-	font-family:"Charis SIL", "Doulos SIL", Gentium, "Arial Unicode MS","Lucida Sans Unicode", Arial, Serif;
+/* footer *************************************/
+div#ipaFoot  {
+	font-family:"Arial Unicode MS", "Lucida Sans Unicode", Arial, Helvetica, Sans-Serif;
+	clear:both;
 }
-
+div#ipaFoot p {
+	margin-top:0;
+	margin-bottom:.5em;
+}
 
 h1#title {
 	text-align:center;
 	font-size:18pt;
 	margin-bottom:2px;
 }
-h1#title #updateDate 
-{
-	color:Red;
-}
 
-th {
+.other {
 	font-weight:normal;
 	text-align:left;
 }
 
-h2 {
+.artic {
 	font-size:13pt;
 	margin-bottom:3px;
-}
-
-td  {
-	font-size:20pt;	
-}
-
-#alphabetRevision {
-	font-size:smaller;
 }
 
 span.ipa  {
@@ -416,95 +409,3 @@ div#tonesAndWordAccents tbody th.or {
 	vertical-align:middle;
 }
 
-/*
-div#tonesAndWordAccents tbody th#notSupported p {
-	padding:1ex;
-	border:dotted 1px #BBBBBB;
-	text-align:center;
-	background-color:#EEEEEE;
-	color:Black;
-	font-style:italic;	
-}
-
-
-#unsupportedContourToneDiacritics 
-{
-}
-*/
-
-/* footer *************************************/
-div#footer  {
-	font-family:"Arial Unicode MS", "Lucida Sans Unicode", Arial, Helvetica, Sans-Serif;
-	clear:both;
-}
-div#footer p {
-	margin-top:0;
-	margin-bottom:.5em;
-}
-
-hr {
-	clear:both;
-}
-#copyright  {
-	clear:both;
-	font-size:9pt;
-	text-align:center;
-	margin-top:1em;
-}
-#footerBoilerplate  {
-	clear:both;
-}
-#buttonLinks  {
-	float:right; 
-	clear:both;
-}
-#buttonLinks img  {
-	height:31px;
-	width:88px;
-	border:none;
-}
-#buttonLinks img,
-#buttonLinks input 
-{
-	vertical-align:middle;
-}
-
-
-/*** Anniversary ******/
-
-#fifthAnniversaryLink {
-	position:fixed;
-	top:0px;
-	left:0px;
-	margin:0;
-	padding:3px;
-	border:solid 1px green;
-	text-decoration:none;
-	color:black;
-	background-color:lime;
-	font-size:10pt;
-}
-#fifthAnniversaryLink:hover {
-	background-color:yellow;
-	color:green;
-}
-
-#fifthAnniversary p {
-	display:none;
-	padding:0.5em;
-	border:solid 2px lime;
-	font-size:10pt;
-	max-width:600px;
-	margin-left:auto;
-	margin-right:auto;
-}
-#fifthAnniversary p a {
-	color:green;
-}
-#fifthAnniversary p a:hover {
-	color:red;
-}
-#fifthAnniversary.target p { display:block; }
-#fifthAnniversary:target p { display:block; }
-#fifthAnniversary.target #fifthAnniversaryLink { display:none; }
-#fifthAnniversary:target #fifthAnniversaryLink { display:none; }
