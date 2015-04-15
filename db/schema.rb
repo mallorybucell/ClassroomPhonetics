@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150414110019) do
+ActiveRecord::Schema.define(version: 20150415102225) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "student_id"
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20150414110019) do
 
   create_table "exercises", force: :cascade do |t|
     t.string   "exercise_code"
-    t.integer  "forvo_id"
+    t.integer  "audio_id"
     t.text     "content"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false

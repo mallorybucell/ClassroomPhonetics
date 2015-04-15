@@ -345,6 +345,16 @@ class Audio < ActiveRecord::Base
   end
 
   def self.display!(exercise)
+    audio = Audio.find(exercise.audio_id)
+    if audio.audio_source == "forvo"
+        Audio.format_forvo_js_for_insert(audio.forvo_id)
+    else
+        fail
+    end
+  end
+
+  def self.display_all
+    Audio.where(audio_source: "forvo")
   end
 
 

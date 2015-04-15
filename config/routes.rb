@@ -36,10 +36,10 @@ Rails.application.routes.draw do
 
   resources :exercises, only: [:new, :create, :edit, :update, :show, :index] do
     get   '/pick_audio'            =>  'exercises#pick_audio',            as: 'pick_audio'
-    post  '/preview_audio'         =>  'exercises#previw_audio',           as: 'preview_audio' 
     post  '/update_audio'          =>  'exercises#update_audio',           as: 'update_audio'
     get   '/enter_stim_content'    =>  'exercises#enter_stim_content',     as: 'enter_stim_content' 
     post  '/update_stim_content'   =>  'exercises#update_stim_content',    as: 'update_stim_content'
+    post  '/use_existing_audio'    =>  'exercises#use_existing_audio',     as: 'add_exist_audio' 
 
   end
 

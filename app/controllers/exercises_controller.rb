@@ -22,6 +22,7 @@ class ExercisesController < ApplicationController
 
   def pick_audio
     @_current_exercise = get_exercise_from_session
+    @_existing_audio = Audio.display_all
   end
 
   def preview_audio
@@ -38,6 +39,10 @@ class ExercisesController < ApplicationController
       flash[:alert] = "Something went wrong. Please try again."
       render :audio
     end
+  end
+
+  def use_existing_audio
+    get_exercise_from_session.update!(audio_id: params[:audio_id])
   end
 
   def enter_stim_content

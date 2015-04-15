@@ -17,6 +17,7 @@ class AudiosController < ApplicationController
     if audio = current_user.create_audio!(forvo_id: data["id"], word: data["word"].downcase, lang_code: data["code"], speaker_gender: data["sex"], forvo_data: params[:data], audio_source: "forvo" )
       #TODO fix amazon upload
       AmazonS3Api.upload_forvo_to_bucket(audio.filename, data["pathogg"])
+      @exercise.update!(audio_id: audio.id)
       flash[:notice] = "Audio '#{audio.filename}' successfully added to exercise '#{@exercise.id}"
       redirect_to exercise_enter_stim_content_path(@exercise)
     else
