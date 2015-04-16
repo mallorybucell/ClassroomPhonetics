@@ -1,7 +1,7 @@
 class LessonsController < ApplicationController
   before_action :authenticate_teacher!
   before_action :authenticate_lesson_owner!, except: [:new, :create, :index, :show] #TODO- need different validation for show b/c lesson not in session at this point
-  before_action :lookup_lesson, except: [:new, :create, :index, :show]
+  #before_action :lookup_lesson, except: [:new, :create, :index, :show]
   #TODO make sure lesson cannot be assigned without exercises
   #TODO make sure lesson can't be updated if part of ongoing assignment
 
@@ -29,9 +29,11 @@ class LessonsController < ApplicationController
   end
 
   def show
+    puts "params: #{params}"
     @lesson = lookup_lesson ||= Lesson.where(id: params[:id].to_i).includes([:course]).first!
     @exercises = @lesson.get_exercises
     @assignment = Assignment.new
+    puts "lesson: #{@lesson}, ex: #{@exercises}"
   end
 
   def edit
@@ -82,8 +84,10 @@ class LessonsController < ApplicationController
   end
 
   def lookup_lesson
+    puts "Looking up lesson: #{params}"
+    puts "Session: #{session.to_h}"
     return Lesson.find(params[:lesson_id]) unless Lesson.find(params[:lesson_id]).nil?
-    return Lesson.where(id: session[:lesson_id].to_i).includes(:course).first! unless !Lesson.where(id: session[:lesson_id].to_i).includes(:course).first!
+    return Lesson.where(id: session[:lesson_id].to_i).includes(:course).first! unless !Lesson.where(id: session[:lesson_id].to_i).includes(:course).first
     raise "We couldn't find what you were looking for. Please try again later."
   end
 
