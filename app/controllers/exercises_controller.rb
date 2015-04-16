@@ -20,6 +20,9 @@ class ExercisesController < ApplicationController
     end
   end
 
+  def edit
+  end
+
   def pick_audio
     @_current_exercise = get_exercise_from_session
     @_existing_audio = Audio.display_all
