@@ -21,6 +21,7 @@ gem 'httparty'
 
 gem 'aws-sdk-rails'
 gem 'twitter-bootstrap-rails'
+gem 'rails_12factor'
 
 group :development, :test do
   gem 'spring'
@@ -36,4 +37,8 @@ end
 group :test do
   gem 'simplecov'
   gem 'zonebie'
+end
+
+group :production do
+  gem 'pg'
 end
