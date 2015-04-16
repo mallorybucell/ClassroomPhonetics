@@ -24,8 +24,8 @@ class LessonsController < ApplicationController
   end
 
   def index
-    lessons = Lesson.where(created_by_teacher_id: current_user.id) .includes([:course])
-    @lessons = lessons.order(params[:sort]) #.compact + " " + params[:direction]) #FIXME SORT
+    @lessons = Lesson.where(created_by_teacher_id: current_user.id).includes([:course])
+    # @lessons = lessons.order(params[:sort]) #.compact + " " + params[:direction]) #FIXME SORT
   end
 
   def show
