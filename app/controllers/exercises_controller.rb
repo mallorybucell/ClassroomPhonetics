@@ -9,10 +9,11 @@ class ExercisesController < ApplicationController
   end
 
   def create
-    current_exercise = Exercise.create!(created_by_teacher_id: current_user.id)
+    current_exercise = Exercise.create!(created_by_teacher_id: current_user.id) #FIX ME add place for description
     session[:current_exercise_id] = current_exercise.id
     flash[:notice] = "New exercise started. Please continue entering the exercise content."
     redirect_to edit_exercise_path(current_exercise)
+    #Exercise.create!(exercise_params.merge(created_by_teacher_id: current_user.id))
   end
 
 

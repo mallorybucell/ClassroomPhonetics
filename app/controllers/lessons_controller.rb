@@ -8,7 +8,7 @@ class LessonsController < ApplicationController
   def new
     @lesson = Lesson.new
     #FIXME
-    @courses = Course.where[user_id: current_user.id]
+    @courses = current_user.courses
     @exercises = Exercise.where(created_by_teacher_id: current_user.id)
   end
 
