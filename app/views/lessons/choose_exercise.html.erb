@@ -18,6 +18,11 @@
   </div>
   <hr />
   <%= form_tag exercises_path do %>
+    <%= label_tag :description, "Enter a description of your new exercise: " %>
+    <br>
+    <%= text_field_tag :description %>
+    <br>
+    <br>
     <%= hidden_field_tag :lesson_id, @lesson.id %>
     <button btn-primary>Create a new exercise for this lesson</button>
   <% end %>

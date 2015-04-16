@@ -12,7 +12,7 @@ class ExercisesController < ApplicationController
     current_exercise = Exercise.create!(created_by_teacher_id: current_user.id) #FIX ME add place for description
     session[:current_exercise_id] = current_exercise.id
     flash[:notice] = "New exercise started. Please continue entering the exercise content."
-    redirect_to edit_exercise_path(current_exercise)
+    redirect_to redirect_by_exercise_type
     #Exercise.create!(exercise_params.merge(created_by_teacher_id: current_user.id))
   end
 
@@ -85,3 +85,17 @@ class ExercisesController < ApplicationController
   end
 
 end
+
+def create
+      #TODO params security
+    if  current_exercise = current_user.create_exercise!(params[:exercise][:exercise_code])
+        session[:current_exercise_id] = current_exercise.id
+        flash[:notice] = "New exercise started. Please continue entering the exercise content."
+        redirect_to redirect_by_exercise_type
+    else
+      flash[:alert] = "Something went wrong. Please try again." #TODO consolidate this
+      render :new
+    end
+  end
+
+  
