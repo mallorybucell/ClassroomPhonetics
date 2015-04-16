@@ -1,6 +1,6 @@
 class ExercisesController < ApplicationController
   before_action :authenticate_teacher!
-  before_action :authenticate_exercise_owner!, except: [:new, :create] #TODO extract this out to a helper since also used in lessons controller
+  # before_action :authenticate_exercise_owner!, except: [:new, :create] #TODO extract this out to a helper; also figure out why bytesize error
 
   #TODO protect flow so have to follow- can't just curl in to step if prev not completedf
   def new
@@ -9,15 +9,13 @@ class ExercisesController < ApplicationController
   end
 
   def create
-      #TODO params security
-    if  current_exercise = current_user.create_exercise!(params[:exercise][:exercise_code])
-        session[:current_exercise_id] = current_exercise.id
-        flash[:notice] = "New exercise started. Please continue entering the exercise content."
-        redirect_to redirect_by_exercise_type
-    else
-      flash[:alert] = "Something went wrong. Please try again." #TODO consolidate this
-      render :new
-    end
+    current_exercise = Exercise.create!(created_by_teacher_id: current_user.id)
+    session[:current_exercise_id] = current_exercise.id
+    flash[:notice] = "New exercise started. Please continue entering the exercise content."
+    redirect_to edit_exercise_path(current_exercise)
+  end
+
+  def edit
   end
 
   def pick_audio
@@ -51,7 +49,7 @@ class ExercisesController < ApplicationController
 
   def update_stim_content
     @exercise = get_exercise_from_session
-   if @exercise.update!(content: params[:content], answer_key: params[:answer_key], description: @exercise.create_description(params[:answer_key]) )
+    if @exercise.update!(content: params[:content], answer_key: params[:answer_key], description: @exercise.create_description(params[:answer_key]) )
       flash[:notice] = "Exercise '#{get_exercise_from_session.description}' created and saved! You can now add it to a lesson."
       session[:current_exercise_id] = nil
       redirect_to lesson_choose_exercise_path(session[:lesson_id])
@@ -71,8 +69,8 @@ class ExercisesController < ApplicationController
   end
 
   def authenticate_exercise_owner!
-    #TODO security
-    raise User::UnauthorizedError unless Exercise.find(params["exercise_id"].to_i).created_by_teacher_id == current_user.id || get_exercise_from_session.created_by_teacher_id == current_user.id
+    binding.pry
+    raise User::UnauthorizedError unless Rack::Utils.secure_compare(current_user.id, (Exercise.find(params["exercise_id"].to_i).created_by_teacher_id)) || Rack::Utils.secure_compare(get_exercise_from_session.created_by_teacher_id, current_user.id)
   end
 
   def redirect_by_exercise_type

@@ -1,28 +1,32 @@
 <div class="container">
-<h1>Add Exercises to your Lesson</h1>
-<div class="container">
-<%= form_tag lesson_add_exercise_path(@lesson) do |f| %>
-<% #TODO: Support for adding multiple exercises %>
-  Add an existing exercise to this lesson:
-  <br>
-  <% if @exercises != [] || nil %>
-  <%=label_tag :exercise_id, "Exercise: " %>
-  <%=select_tag :exercise_id, options_from_collection_for_select(@exercises, :id, :description) %>
-  <br>
-  <button>Add Exercise to Lesson</button>
-  <br>
-  <%= link_to "Create a new exercise", new_exercise_path %>
-  <% else %>
-  <p>You have not created any exercises.</p>
+  <h5>Add Exercises to your Lesson</h5>
+  <div class="container">
+    <% #TODO: Change to edit/del exercises from lesson %>
+    Add an existing exercise to this lesson:
+    <br>
+    <% if @exercises != [] || nil %>
+      <%= form_tag lesson_add_exercise_path(@lesson) do |f| %>
+      <%=label_tag :exercise_id, "Exercise: " %>
+      <%=select_tag :exercise_id, options_from_collection_for_select(@exercises, :id, :description) %>
+      <br>
+      <button>Add Exercise to Lesson</button>
+      <br>
+      <% end %>
+    <% else %>
+    <p>You have not created any exercises.</p>
+    <% end %>
+  </div>
+  <p>or</p>
+  <%= form_tag exercises_path do %>
+    <%= hidden_field_tag :lesson_id, @lesson.id %>
+    <button btn-primary>Create a new exercise for this lesson</button>
   <% end %>
-<% end %>
-</div>
-<br>
-<br>
-<div class="container">
-<%= link_to "Preview or Use Lesson for Course", lesson_path(@lesson) %>
-<%= link_to "Back to Dashboard", root_path %>
-<br>
-<% #TODO select activity or assignment type upon creation %>
-</div>
+
+  <br>
+  <br>
+  <div class="container">
+    <%= link_to "Preview or Use Lesson for Course", lesson_path(@lesson) %>
+    <%= link_to "Back to Dashboard", root_path %>
+    <br>
+  </div>
 </div>
