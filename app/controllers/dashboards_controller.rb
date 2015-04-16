@@ -1,13 +1,9 @@
 class DashboardsController < ApplicationController
 
   def show
-    if current_user.teacher?
-        @courses = current_user.courses
-        get_open_assignments
-        render :teacher
-      else
-        redirect_to new_user_session_path
-      end
+    @courses = current_user.courses
+    get_open_assignments
+    render :teacher
   end
 
   def profile
