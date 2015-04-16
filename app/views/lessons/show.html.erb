@@ -65,9 +65,10 @@
 
   <table>
     <tbody>
+
       <% @exercises.each do |ex| %>
         <% @ex = ex %>
-        <%= render exercise_layout_hash[@ex.exercise_code] %>
+        <tr><td><%= render exercise_layout_hash[@ex.exercise_code] %></td></tr>
       <% end %>
     </tbody>
   </table>

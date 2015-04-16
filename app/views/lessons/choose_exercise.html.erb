@@ -4,7 +4,9 @@
     <% #TODO: Change to edit/del exercises from lesson %>
     Add an existing exercise to this lesson:
     <br>
-    <% if @exercises != [] || nil %>
+    <% if @exercises == [] || @exercises.nil? %>
+        <p>You have not created any exercises.</p>
+    <% else %>
       <%= form_tag lesson_add_exercise_path(@lesson) do |f| %>
       <%=label_tag :exercise_id, "Exercise: " %>
       <%=select_tag :exercise_id, options_from_collection_for_select(@exercises, :id, :description) %>
@@ -12,11 +14,9 @@
       <button>Add Exercise to Lesson</button>
       <br>
       <% end %>
-    <% else %>
-    <p>You have not created any exercises.</p>
     <% end %>
   </div>
-  <p>or</p>
+  <hr />
   <%= form_tag exercises_path do %>
     <%= hidden_field_tag :lesson_id, @lesson.id %>
     <button btn-primary>Create a new exercise for this lesson</button>

@@ -1,7 +1,7 @@
 class LessonsController < ApplicationController
   before_action :authenticate_teacher!
-  before_action :authenticate_lesson_owner!, except: [:new, :create, :index, :show] #TODO- need different validation for show b/c lesson not in session at this point
-  before_action :lookup_lesson, except: [:new, :create, :index, :show]
+  # before_action :authenticate_lesson_owner!, except: [:new, :create, :index, :show] #TODO- need different validation for show b/c lesson not in session at this point
+  # before_action :lookup_lesson, except: [:new, :create, :index, :show]
   #TODO make sure lesson cannot be assigned without exercises
   #TODO make sure lesson can't be updated if part of ongoing assignment
 
@@ -47,6 +47,7 @@ class LessonsController < ApplicationController
     @lesson = lookup_lesson
     session[:lesson_id] = @lesson.id
     @exercises = Exercise.where(created_by_teacher_id: current_user.id)
+
   end
 
   def add_exercise #remove exercise
@@ -82,13 +83,7 @@ class LessonsController < ApplicationController
   end
 
   def lookup_lesson
-    return Lesson.find(params[:lesson_id]) unless Lesson.find(params[:lesson_id]).nil?
-    return Lesson.where(id: session[:lesson_id].to_i).includes(:course).first! unless !Lesson.where(id: session[:lesson_id].to_i).includes(:course).first!
-    raise "We couldn't find what you were looking for. Please try again later."
-  end
-
-  def sort_column
-    Lesson.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    Lesson.where(id: session[:lesson_id].to_i).includes(:course).first
   end
 
 
