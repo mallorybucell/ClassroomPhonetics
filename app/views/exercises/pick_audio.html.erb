@@ -41,13 +41,14 @@
     </div>
     <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
       <div class="panel-body">
-                <button onclick="startRecording(this);">record</button>
+                <% #TODO clean this up %>
+        <button onclick="startRecording(this);">record</button>
         <button onclick="stopRecording(this);" disabled>stop</button>
 
-        <h5>Recordings: </h5>
+        <h4>Recordings: </h4>
         <ul id="recordingslist"></ul>
 
-        <h5>Recorder Status: </h5>
+        <h4>Recorder Status: </h4>
         <pre id="log"></pre>
 
         <script>
@@ -92,7 +93,7 @@
       function createDownloadLink() {
         recorder && recorder.exportWAV(function(blob) {
           var data = new FormData();
-          data.append("blob", blob);
+          // data.append("blob", blob);
           $.ajax("/save_recording", {
             type: "POST",
             data: data,
@@ -126,14 +127,14 @@
           // __log('Audio context set up.');
           // __log('navigator.getUserMedia ' + (navigator.getUserMedia ? 'available.' : 'not present!'));
         } catch (e) {
-          alert('You must allow this program to use your microphone to use the record audio feature. Click allow by the nav bar to enable.' );
+          alert('No web audio support in this browser!');
         }
         
         navigator.getUserMedia({audio: true}, startUserMedia, function(e) {
           // __log('No live audio input: ' + e);
         });
       };
-    </script>
+    </script>          
       </div>
     </div>
   </div>
