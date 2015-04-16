@@ -24,8 +24,7 @@ class LessonsController < ApplicationController
   end
 
   def index
-    lessons = Lesson.where(created_by_teacher_id: current_user.id) .includes([:course])
-    @lessons = lessons.order(params[:sort]) #.compact + " " + params[:direction]) #FIXME SORT
+    @lessons = Lesson.where(created_by_teacher_id: current_user.id).includes([:course])
   end
 
   def show
@@ -84,9 +83,7 @@ class LessonsController < ApplicationController
   end
 
   def lookup_lesson
-    return Lesson.find(params[:lesson_id]) unless Lesson.find(params[:lesson_id]).nil?
-    return Lesson.where(id: session[:lesson_id].to_i).includes(:course).first! unless !Lesson.where(id: session[:lesson_id].to_i).includes(:course).first
-    raise "We couldn't find what you were looking for. Please try again later."
+    Lesson.where(id: session[:lesson_id].to_i).includes(:course).first
   end
 
   def sort_column

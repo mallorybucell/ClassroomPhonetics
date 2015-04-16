@@ -9,16 +9,11 @@ class ExercisesController < ApplicationController
   end
 
   def create
-      #TODO params security
-    if  current_exercise = current_user.create_exercise!(params[:exercise][:exercise_code])
-        session[:current_exercise_id] = current_exercise.id
-        flash[:notice] = "New exercise started. Please continue entering the exercise content."
-        redirect_to redirect_by_exercise_type
-    else
-      flash[:alert] = "Something went wrong. Please try again." #TODO consolidate this
-      render :new
-    end
-  end
+    current_exercise = Exercise.create!(created_by_teacher_id: current_user.id)
+    session[:current_exercise_id] = current_exercise.id
+    flash[:notice] = "New exercise started. Please continue entering the exercise content."
+    redirect_to edit_exercise_path(current_exercise)
+   end
 
   def edit
   end
@@ -74,8 +69,7 @@ class ExercisesController < ApplicationController
   end
 
   def authenticate_exercise_owner!
-    #TODO security
-    raise User::UnauthorizedError unless Exercise.find(params["exercise_id"].to_i).created_by_teacher_id == current_user.id || get_exercise_from_session.created_by_teacher_id == current_user.id
+    raise User::UnauthorizedError unless Rack::Utils.secure_compare(current_user.id, (Exercise.find(params["exercise_id"].to_i).created_by_teacher_id)) || Rack::Utils.secure_compare(get_exercise_from_session.created_by_teacher_id, current_user.id)
   end
 
   def redirect_by_exercise_type
