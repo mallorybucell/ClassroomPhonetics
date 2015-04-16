@@ -84,8 +84,6 @@ class LessonsController < ApplicationController
   end
 
   def lookup_lesson
-    puts "Looking up lesson: #{params}"
-    puts "Session: #{session.to_h}"
     return Lesson.find(params[:lesson_id]) unless Lesson.find(params[:lesson_id]).nil?
     return Lesson.where(id: session[:lesson_id].to_i).includes(:course).first! unless !Lesson.where(id: session[:lesson_id].to_i).includes(:course).first
     raise "We couldn't find what you were looking for. Please try again later."
