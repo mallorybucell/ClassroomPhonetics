@@ -15,13 +15,10 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
       <ul class="nav navbar-nav">
 
-    <%= menu_item "Current Courses ", teacher_index_course_path %>
-    <%= drop_down "Lessons & Assignments " do %>
-      <%= menu_item "Lessons Main ", lessons_path %>
-      <%= menu_item "Assignments Main ", assignments_path %>
-      <% end %>
-    <%= menu_item "Manage Feedback", exercises_path %>
-    <%= menu_item "Manage Preferences", exercises_path %>
+
+    <%= menu_item "Lessons & Exercises", lessons_path %>
+    <%= menu_item "Feedback & Assignments", exercises_path %>
+    <%= menu_item "Manage Preferences", profile_dashboard_path %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><%= button_to " Sign Out", destroy_user_session_path, method: :delete, class: 'btn btn-link' %></li>

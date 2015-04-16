@@ -43,5 +43,7 @@ Rails.application.routes.draw do
 
   end
 
-  resource :dashboard, only: [:show]
+  resource :dashboard, only: [:show] do
+    get '/profile'  => 'dashboards#profile', as: 'profile'
+  end
 end
