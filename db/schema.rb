@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150415102225) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "assignments", force: :cascade do |t|
     t.integer  "student_id"
     t.integer  "lesson_id"
@@ -23,8 +26,8 @@ ActiveRecord::Schema.define(version: 20150415102225) do
     t.datetime "updated_at",   null: false
   end
 
-  add_index "assignments", ["lesson_id"], name: "index_assignments_on_lesson_id"
-  add_index "assignments", ["student_id"], name: "index_assignments_on_student_id"
+  add_index "assignments", ["lesson_id"], name: "index_assignments_on_lesson_id", using: :btree
+  add_index "assignments", ["student_id"], name: "index_assignments_on_student_id", using: :btree
 
   create_table "audios", force: :cascade do |t|
     t.integer "forvo_id"
@@ -64,8 +67,8 @@ ActiveRecord::Schema.define(version: 20150415102225) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "lesson_exercises", ["exercise_id"], name: "index_lesson_exercises_on_exercise_id"
-  add_index "lesson_exercises", ["lesson_id"], name: "index_lesson_exercises_on_lesson_id"
+  add_index "lesson_exercises", ["exercise_id"], name: "index_lesson_exercises_on_exercise_id", using: :btree
+  add_index "lesson_exercises", ["lesson_id"], name: "index_lesson_exercises_on_lesson_id", using: :btree
 
   create_table "lessons", force: :cascade do |t|
     t.integer  "created_by_teacher_id"
@@ -85,8 +88,8 @@ ActiveRecord::Schema.define(version: 20150415102225) do
     t.string   "content"
   end
 
-  add_index "responses", ["assignment_id"], name: "index_responses_on_assignment_id"
-  add_index "responses", ["exercise_id"], name: "index_responses_on_exercise_id"
+  add_index "responses", ["assignment_id"], name: "index_responses_on_assignment_id", using: :btree
+  add_index "responses", ["exercise_id"], name: "index_responses_on_exercise_id", using: :btree
 
   create_table "user_courses", force: :cascade do |t|
     t.integer  "user_id"
@@ -96,8 +99,8 @@ ActiveRecord::Schema.define(version: 20150415102225) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "user_courses", ["course_id"], name: "index_user_courses_on_course_id"
-  add_index "user_courses", ["user_id"], name: "index_user_courses_on_user_id"
+  add_index "user_courses", ["course_id"], name: "index_user_courses_on_course_id", using: :btree
+  add_index "user_courses", ["user_id"], name: "index_user_courses_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
@@ -117,7 +120,15 @@ ActiveRecord::Schema.define(version: 20150415102225) do
     t.boolean  "student"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "assignments", "lessons"
+  add_foreign_key "assignments", "users", column: "student_id"
+  add_foreign_key "lesson_exercises", "exercises"
+  add_foreign_key "lesson_exercises", "lessons"
+  add_foreign_key "responses", "assignments"
+  add_foreign_key "responses", "exercises"
+  add_foreign_key "user_courses", "courses"
+  add_foreign_key "user_courses", "users"
 end

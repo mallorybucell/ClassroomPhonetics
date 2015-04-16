@@ -1,13 +1,14 @@
 class LessonsController < ApplicationController
   before_action :authenticate_teacher!
-  before_action :authenticate_lesson_owner!, except: [:new, :create, :index, :show] #TODO- need different validation for show b/c lesson not in session at this point
-  #before_action :lookup_lesson, except: [:new, :create, :index, :show]
+  # before_action :authenticate_lesson_owner!, except: [:new, :create, :index, :show] #TODO- need different validation for show b/c lesson not in session at this point
+  # before_action :lookup_lesson, except: [:new, :create, :index, :show]
   #TODO make sure lesson cannot be assigned without exercises
   #TODO make sure lesson can't be updated if part of ongoing assignment
 
   def new
     @lesson = Lesson.new
-    @courses = current_user.courses
+    #FIXME
+    @courses = Course.where[user_id: current_user.id]
     @exercises = Exercise.where(created_by_teacher_id: current_user.id)
   end
 
@@ -48,6 +49,7 @@ class LessonsController < ApplicationController
     @lesson = lookup_lesson
     session[:lesson_id] = @lesson.id
     @exercises = Exercise.where(created_by_teacher_id: current_user.id)
+
   end
 
   def add_exercise #remove exercise
@@ -83,12 +85,10 @@ class LessonsController < ApplicationController
   end
 
   def lookup_lesson
-    Lesson.where(id: session[:lesson_id].to_i).includes(:course).first
+    Lesson.where(id: params[:lesson_id].to_i).includes(:course).first
   end
 
-  def sort_column
-    Lesson.column_names.include?(params[:sort]) ? params[:sort] : "name"
-  end
+
 
 
 end

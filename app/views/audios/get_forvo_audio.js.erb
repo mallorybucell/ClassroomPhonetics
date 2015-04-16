@@ -1,0 +1,7 @@
+$('#forvo-audio-results').append("<%= j render 'pick_a_forvo' %>");
+$("#forvo-audio-results td[data-forvo-id]").each(function(i, cell) {
+  var $cell = $(cell);
+  var id = $cell.data('forvo-id');
+  $cell.append("<script src='http://www.forvo.com/_ext/ext-prons.js?id=" + id + "' charset=utf-8></script>")
+  // $cell.append("<script>alert(" + id + ")</script>") try to write script inside iframe
+})

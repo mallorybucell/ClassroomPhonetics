@@ -1,6 +1,6 @@
 class ExercisesController < ApplicationController
   before_action :authenticate_teacher!
-  before_action :authenticate_exercise_owner!, except: [:new, :create] #TODO extract this out to a helper since also used in lessons controller
+  # before_action :authenticate_exercise_owner!, except: [:new, :create] #TODO extract this out to a helper; also figure out why bytesize error
 
   #TODO protect flow so have to follow- can't just curl in to step if prev not completedf
   def new
@@ -13,7 +13,9 @@ class ExercisesController < ApplicationController
     session[:current_exercise_id] = current_exercise.id
     flash[:notice] = "New exercise started. Please continue entering the exercise content."
     redirect_to edit_exercise_path(current_exercise)
-   end
+  end
+
+
 
   def edit
   end
@@ -49,7 +51,7 @@ class ExercisesController < ApplicationController
 
   def update_stim_content
     @exercise = get_exercise_from_session
-   if @exercise.update!(content: params[:content], answer_key: params[:answer_key], description: @exercise.create_description(params[:answer_key]) )
+    if @exercise.update!(content: params[:content], answer_key: params[:answer_key], description: @exercise.create_description(params[:answer_key]) )
       flash[:notice] = "Exercise '#{get_exercise_from_session.description}' created and saved! You can now add it to a lesson."
       session[:current_exercise_id] = nil
       redirect_to lesson_choose_exercise_path(session[:lesson_id])
