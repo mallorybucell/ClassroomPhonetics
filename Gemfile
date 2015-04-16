@@ -41,3 +41,7 @@ group :test do
   gem 'zonebie'
 end
 
+group :production, :staging do
+  gem "pg"
+end
+
