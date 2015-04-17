@@ -24,9 +24,9 @@
 }
 
 /*format non-pulmonic consonants*/
-#nonPulmonicConsonants td:hover {
+/*#nonPulmonicConsonants td:hover {
 	background-color: #FFFF66;
-}
+}*/
 
 /*format vowels*/
 #vowelQuadrilateral span:hover {
@@ -34,8 +34,8 @@
 }
 
 /*format other symbols and diacritics*/
-#otherSymbols td:hover {
-	background-color: #FFFF66;
+/*#otherSymbols td:hover {
+	background-color: #FFFF66;*/
 }
 
 #chartIntro {
