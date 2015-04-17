@@ -1,7 +1,14 @@
+<div class="container">
+  <ul class="breadcrumb">
+    <li>Creating an exercise:</li>
+    <li><a href="<%=new_exercise_path%>">Select Task</a></li>
+    <li><a href="<%=exercise_pick_audio_path(session[:current_exercise_id])%>">Choose Audio</a></li>
+    <li class="active">Enter Prompt and Answer Key</a></li>
+  </ul>
+  <h6>Add remaining question content:</h6>
+<p class="lead">Add the question text for the student to read if needed, and correct answer for your own reference. </p>
 
-<h2>Add the Question Text and Correct Answer </h2>
-
-<p>The student will: <%= Exercise.task_hash[@_current_exercise.exercise_code] %>.</p>
+<p>The student will: <strong><%= Exercise.task_hash[@_current_exercise.exercise_code] %>.</strong></p>
 
 <%= form_tag exercise_update_stim_content_path(@_current_exercise) do %>
 <% unless @_current_exercise.exercise_code == "L-WI" %>
@@ -16,3 +23,5 @@
 <% end %>
 <br>
 <%= render 'ipa_keyboard' %>
+</div>
+

@@ -1,5 +1,10 @@
 <div class="container">
-<% #TODO make a partial or fold into pick_audio %>
+  <ul class="breadcrumb">
+    <li>Creating an exercise:</li>
+    <li><a href="<%=new_exercise_path%>">Select Task</a></li>
+    <li><a href="<%=exercise_pick_audio_path(session[:current_exercise_id])%>">Choose Audio</a></li>
+    <li class="active">Choose Audio: Select Forvo Results</li>
+  </ul>
 <table class="table table-striped">
   <tbody>
   <% @audio_choices.each do |choice| %>

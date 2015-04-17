@@ -1,1 +1,33 @@
-edit.html.erb
+<div class="container">
+<p class="lead">Current Exercise Content: </p>
+  <table>
+    <tbody>
+      <tr><td><%= render exercise_layout_hash[@ex.exercise_code] %></td></tr>
+    </tbody>
+  </table>
+<br>
+<% if @ex.current_status == "unassigned" %>
+  <p class="lead">Edit Exercise Content</p>
+  <p>Click on the existing text values to change them. Click Save to save your changes.
+    <%= form_tag exercise_path(@ex), method: :patch do %>
+      <% if @ex.exercise_code != "L-WI"%>
+        <%= label_tag :content %>
+        <%= text_field_tag :content, :value => @ex.content %>
+      <% end %>
+      <%= label_tag :answer_key %>
+      <%= text_field_tag :answer_key, nil, :placeholder => @ex.answer_key, :value => @ex.answer_key %>
+      <br>
+      <%= label_tag :description %>
+      <%= text_field_tag :description, nil, :placeholder => @ex.description, :value => @ex.description %>
+      <%if @ex.exercise_code == "L-WI" %>
+        <% hidden_field_tag :content, :value => "audio" %>
+      <% end %>
+      <br>
+      <button class="btn btn-info">Save changes!</button>
+    <% end %>
+  <% else %>
+    <p class="lead">This exercise is currently assigned to students and cannot be changed.</p>
+  <% end %>
+  <br>
+</div>
+

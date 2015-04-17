@@ -1,8 +1,8 @@
 <div class="container">
-  <h5>Add Exercises to your Lesson</h5>
+  <h5>Create a Lesson: Add Exercises to your Lesson</h5>
   <div class="container">
     <% #TODO: Change to edit/del exercises from lesson %>
-    Add an existing exercise to this lesson:
+    <p class="lead">Add an existing exercise to this lesson:</p>
     <br>
     <% if @exercises == [] || @exercises.nil? %>
         <p>You have not created any exercises.</p>
@@ -16,21 +16,24 @@
       <% end %>
     <% end %>
   </div>
+  <div class="container">
   <hr />
-  <%= form_tag exercises_path do %>
+  <p class="lead">Add a new exercise to this lesson</p>
+  <%= form_tag new_exercise_path, method: :get do %>
     <%= label_tag :description, "Enter a description of your new exercise: " %>
     <br>
-    <%= text_field_tag :description %>
+    <%= text_field_tag :description, nil, :required => true %>
     <br>
     <br>
     <%= hidden_field_tag :lesson_id, @lesson.id %>
     <button btn-primary>Create a new exercise for this lesson</button>
   <% end %>
+  </div>
+  <br>
+  <br>
 
-  <br>
-  <br>
   <div class="container">
-    <%= link_to "Preview or Use Lesson for Course", lesson_path(@lesson) %>
+    <%= link_to "Preview Lesson for Course |", lesson_path(@lesson) %>
     <%= link_to "Back to Dashboard", root_path %>
     <br>
   </div>

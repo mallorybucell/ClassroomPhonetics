@@ -22,9 +22,11 @@
   <% end %>
   <br>
   <% flash.each do |flash_type, message| %>
+  <div class="container">
     <div class="alert alert-<%= translate_to_bootstrap flash_type %>">
       <%= message %>
   <% end %>
+  </div>
   </div>
   <%= yield %>
 

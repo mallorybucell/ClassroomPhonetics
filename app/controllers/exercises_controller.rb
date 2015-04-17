@@ -9,16 +9,36 @@ class ExercisesController < ApplicationController
   end
 
   def create
-    current_exercise = Exercise.create!(created_by_teacher_id: current_user.id) #FIX ME add place for description
-    session[:current_exercise_id] = current_exercise.id
-    flash[:notice] = "New exercise started. Please continue entering the exercise content."
-    redirect_to redirect_by_exercise_type
-    #Exercise.create!(exercise_params.merge(created_by_teacher_id: current_user.id))
+    if current_exercise = Exercise.create!(exercise_params.merge(created_by_teacher_id: current_user.id))
+      session[:current_exercise_id] = current_exercise.id
+      flash[:notice] = "New exercise started. Please continue entering the exercise content."
+      redirect_to redirect_by_exercise_type
+    else
+      flash[:alert] = "Sorry- we couldn't create that exercise. Please try again." #TODO consolidate this
+      render :new
+    end
   end
 
 
 
   def edit
+    if @ex = get_exercise_from_session
+      render :edit
+    else
+      flash[:alert] = "We could not find the exercise you were looking for. Please try again later."
+      redirect_to :back
+    end
+  end
+
+  def update
+    @exercise = get_exercise_from_session
+    if @exercise.update!(update_params)
+      flash[:notice] = "Updated successfully!"
+      redirect_to :back
+    else
+      flash[:alert] = "Sorry- something went wrong!"
+      redirect_to :back
+    end
   end
 
   def pick_audio
@@ -43,7 +63,13 @@ class ExercisesController < ApplicationController
   end
 
   def use_existing_audio
-    get_exercise_from_session.update!(audio_id: params[:audio_id])
+    if get_exercise_from_session.update!(audio_id: params[:audio_id])
+      flash[:notice] = "Audio saved and added to exercise."
+      redirect_to exercise_enter_stim_content_path(get_exercise_from_session)
+    else
+      flash[:alert] = "Something went wrong. Please try again."
+      render :audio
+    end
   end
 
   def enter_stim_content
@@ -63,8 +89,12 @@ class ExercisesController < ApplicationController
   end
 
  private
-  def exercise_params #TODO: FIX create function to take this (user func takes 2 args OR pass in params more securely
-    params.require(:lesson).permit(:course_id, :description)
+  def exercise_params
+    params.require(:exercise).permit(:exercise_code, :description)
+  end
+
+  def update_params
+    params.fetch(:exercise, {}).permit(:content, :answer_key, :description)
   end
 
   def audio_params
@@ -86,16 +116,6 @@ class ExercisesController < ApplicationController
 
 end
 
-def create
-      #TODO params security
-    if  current_exercise = current_user.create_exercise!(params[:exercise][:exercise_code])
-        session[:current_exercise_id] = current_exercise.id
-        flash[:notice] = "New exercise started. Please continue entering the exercise content."
-        redirect_to redirect_by_exercise_type
-    else
-      flash[:alert] = "Something went wrong. Please try again." #TODO consolidate this
-      render :new
-    end
-  end
+
 
   

@@ -1,8 +1,12 @@
 <div class="container">
   <ul class="breadcrumb">
-    <li><a href="#">Select Task</a></li>
+    <li>Creating an exercise:</li>
+    <li><a href="<%=new_exercise_path%>">Select Task</a></li>
     <li class="active">Choose Audio</li>
   </ul>
+  <h6>If needed, choose media. </h6>
+  <p class="lead">Select an audio file for the student to listen to.</p>
+  <br>
   <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
     <div class="panel panel-default">
       <div class="panel-heading" role="tab" id="headingOne">
@@ -26,7 +30,7 @@
             <button>Get Options from Forvo</button>
             <% end %>
           </div>
-          <!-- TODO AJAX the search results to here; help for inability to upload -->
+          <!-- Can't AJAX b/c forvo -->
         </div>
       </div>
     </div>
@@ -114,7 +118,6 @@
           li.appendChild(hf);
           recordingslist.appendChild(li);
         });
-      }
 
       function init() {
         try {

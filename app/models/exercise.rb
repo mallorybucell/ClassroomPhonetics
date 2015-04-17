@@ -40,5 +40,14 @@ class Exercise < ActiveRecord::Base
     }
   end
 
+  def current_status
+    lessons = self.lessons.includes(:assignments).where('assignments.due_at' => (Time.now..1.year.from_now)).references(:assignments)
+    if lessons != []
+      "assigned"
+    else
+      "unassigned"
+    end
+  end
+
 
 end

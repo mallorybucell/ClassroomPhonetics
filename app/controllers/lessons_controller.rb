@@ -65,7 +65,13 @@ class LessonsController < ApplicationController
   end
 
   def remove_exercise
-    fail #TODO
+    if LessonExercise.where(exercise_id: params[:exercise_id].to_i, lesson_id: params[:current_lesson_id].to_i).first.delete
+      flash[:notice] = "Exercise removed from lesson!"
+      redirect_to :back
+    else
+      flash[:alert] = "Sorry, something went wrong."
+      redirect_to :back
+    end
   end
 
   def destroy

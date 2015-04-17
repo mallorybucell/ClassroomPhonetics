@@ -14,10 +14,10 @@ class ApplicationController < ActionController::Base
   
   private
 
-  rescue_from StandardError do |e|
-      flash[:alert] = "Oops! Something went wrong. Please try again."
-      redirect_to :back
-  end
+  # rescue_from StandardError do |e|
+  #     flash[:alert] = "Oops! Something went wrong. Please try again."
+  #     redirect_to :back
+  # end
 
 
   rescue_from User::UnauthorizedError do |e|
@@ -39,8 +39,16 @@ class ApplicationController < ActionController::Base
   end
 
   def get_exercise_from_session
-   return Exercise.find(session[:current_exercise_id].to_i) if !Exercise.find(session[:current_exercise_id].to_i).nil?
-   return Exercise.find(params[:exercise_id].to_i) if !Exercise.find(params[:exercise_id].to_i).nil?
+    if session[:current_exercise_id]
+      Exercise.find(session[:current_exercise_id].to_i)
+    elsif params[:exercise_id]
+      Exercise.find(params[:exercise_id].to_i)
+    elsif params[:id] && params[:controller] == "exercises"
+      Exercise.find(params[:id])
+    else
+      flash[:notice] = "Could not find exercise. Please try again later."
+      redirect_to :back
+    end
   end
 
   def sort_direction

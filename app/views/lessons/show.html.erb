@@ -1,77 +1,121 @@
 <div class="container">
 
-    <div class="pull-right">
-      <div id="sidebar" data-spy="affix" data-offset-top="60" data-offset-bottom="200">
-          <div class="vspaced"><%= render 'ipa_ref_tabs' %></div>
-         <%= render 'ipa_sound_ref' %>
-      </div>
-    </div>
-
-
-  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-  <div class="col col-md">
-    <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="headingTwo">
-        <h4 class="panel-title">
-          <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" onclick="init()">
-            Set Lesson as an Individual Assignment
-          </a>
-        </h4>
-      </div>
-      <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-        <div class="panel-body">
-        <p>Setting lesson as an assignment for each student in the course: <strong><h6><%= @lesson.course.course_name %></h6></strong></p>
-          <div class="container" id="create-assignment">
-            <%= form_for @assignment, url: assignments_path do |f| %>
-            <%=f.label :due_at, "Due On: " %>
-            <%=f.date_field :due_at, :required => true %>
-            <br>
-            <p>Note: default closing time for assignment is midnight of the due date.</p>
-            <br>
-            <%=hidden_field_tag :course_id, @lesson.course_id %>
-            <%=hidden_field_tag :lesson_id, @lesson.id %>
-            <button>Set Assignment</button>
-            <% end %>
-
-          </div>
-
-        </div>
-      </div>
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-heading" role="tab" id="headingOne">
-        <h4 class="panel-title">
-          <%= link_to "Add Exercise to Lesson", lesson_choose_exercise_path(@lesson) %>
-        </h4>
-      </div>
-    </div>
-       <div class="panel panel-default">
-          <div class="panel-heading" role="tab" id="headingOne">
-          <h4 class="panel-title">
-          <%= link_to "Back to Lessons Main", lessons_path %>
-        </h4>
-      </div>
-    </div>
+  <div class="pull-right">
+    <div id="sidebar" data-spy="affix" data-offset-top="60" data-offset-bottom="200">
+      <div class="vspaced"><%= render 'ipa_ref_tabs' %></div>
+      <%= render 'ipa_sound_ref' %>
     </div>
   </div>
 
+
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <div class="col col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingTwo">
+          <h4 class="panel-title">
+            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" onclick="init()">
+              Set Lesson as an Individual Assignment
+            </a>
+          </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            <p>Setting lesson as an assignment for each student in the course: <strong><h6><%= @lesson.course.course_name %></h6></strong></p>
+            <div class="container" id="create-assignment">
+              <%= form_for @assignment, url: assignments_path do |f| %>
+              <%=f.label :due_at, "Due On: " %>
+              <%=f.date_field :due_at, :required => true %>
+              <br>
+              <p>Note: default closing time for assignment is midnight of the due date.</p>
+              <br>
+              <%=hidden_field_tag :course_id, @lesson.course_id %>
+              <%=hidden_field_tag :lesson_id, @lesson.id %>
+              <button>Set Assignment</button>
+              <% end %>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class='panel panel-default'>
+      <div class="panel-heading" role="tab" id="headingFour">
+        <h4 class="panel-title">
+            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour" onclick="init()">
+                Edit or Remove Exercises from this Lesson
+            </a>
+        </h4>
+    </div>
+    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+        <div class="panel-body">
+            <table class="table table-striped">
+                <tbody>
+                    <% @exercises.each do |ex| %>
+                    <% @ex = ex %>
+                    <tr>
+                        <td><%=@ex.description%></td>
+                        <td><%= form_tag edit_exercise_path(@ex), method: :get do %>
+                            <button class="btn btn-primary">Edit Exercise</button>  
+                            <% end %>
+                        </td>
+                        <td><%= form_tag lesson_remove_exercise_path(@ex), method: :patch do %>
+                            <%= hidden_field_tag :exercise_id, @ex.id %>
+                             <%= hidden_field_tag :current_lesson_id, @lesson.id %>
+                            <button class="btn btn-warning">Remove Exercise from Lesson</button>  
+                            <% end %>
+                        </td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+
+        </div>
+        </div>
+
+    </div>
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingThree">
+          <h4 class="panel-title">
+            <%= link_to "Add an Exercise to this Lesson", lesson_choose_exercise_path(@lesson) %>
+          </h4>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingThree">
+          <h4 class="panel-title">
+            <%= link_to "Back to Lessons Main", lessons_path %>
+          </h4>
+        </div>
+      </div>
+    </div>
+  </div>
   <br>
-    <div class="col">
+  <br>
+  <br>
+  <br>
+  <hr>
+  <div class="container">
+    <div class="row">
+      <div clas="col col-md"
       <p class="lead">This is the preview page for lesson <%= @lesson.id %></p>
     </div>
+  </div>
+</div>
 
 
-  <h2> '<%=@lesson.description %>'</h2>
 
-  <table>
-    <tbody>
-      <% @exercises.each do |ex| %>
-        <% @ex = ex %>
-        <tr><td><%= render exercise_layout_hash[@ex.exercise_code] %></td></tr>
-      <% end %>
-    </tbody>
-  </table>
-  
+
+<h2> '<%=@lesson.description %>'</h2>
+
+<table>
+  <tbody>
+    <% @exercises.each do |ex| %>
+    <% @ex = ex %>
+    <tr><td><%= render exercise_layout_hash[@ex.exercise_code] %></td></tr>
+    <% end %>
+  </tbody>
+</table>
+
 </div>
 
 
