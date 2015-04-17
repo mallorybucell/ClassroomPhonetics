@@ -35,7 +35,7 @@
           <% @by_lesson.each do |lesson| %>
           <% l = Lesson.find(lesson.lesson_id); a = l.assignments.first %>
           <tr>
-            <td><%= l.description%></td><td><%= a.current_status %></td><td><%=distance_of_time_in_words(a.due_at, Time.now) %> <%= a.get_relative %> </td>
+            <td><%= link_to "#{l.description}", assignments_path %></td><td><%= a.current_status %></td><td><%=distance_of_time_in_words(a.due_at, Time.now) %> <%= a.get_relative %> </td>
           </tr>
           <% end %>
         </tbody>
