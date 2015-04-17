@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   def home
     if current_user
-      redirect_to dashboard_path
+      redirect_to profile_dashboard_path
     else
       render :home
     end

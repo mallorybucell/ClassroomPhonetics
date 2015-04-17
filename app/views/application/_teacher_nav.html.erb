@@ -17,8 +17,7 @@
 
 
     <%= menu_item "Lessons & Exercises", lessons_path %>
-    <%= menu_item "Feedback & Assignments", exercises_path %>
-    <%= menu_item "Manage Preferences", profile_dashboard_path %>
+    <%= menu_item "Feedback & Assignments", dashboard_path %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><%= button_to " Sign Out", destroy_user_session_path, method: :delete, class: 'btn btn-link' %></li>
