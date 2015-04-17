@@ -26,12 +26,16 @@ Rails.application.routes.draw do
 
 
   resources :assignments, only: [ :new, :create, :show, :index] do
+    post '/:id/submit' => 'responses#submit', as: 'submit_assignment_responses'
+    get '/:id/edit_feedback' => 'responses#edit_feedback', as: 'edit_feedback'
+    post '/:id/update_feedback' => 'responses#update_feedback', as: 'update_feedback'
+    post '/:id/update_feedback' => 'responses#submit_feedback', as: 'submit_feedback'
   end
   
 
-  # scope '/assignments' do
-  #   resources :responses
-  # end
+  scope '/assignments' do
+    resources :responses, only: [:new, :create, :edit, :update]
+  end
 
 
   resources :exercises, only: [:new, :create, :edit, :update, :show, :index] do

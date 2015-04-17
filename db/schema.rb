@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150415102225) do
+ActiveRecord::Schema.define(version: 20150417103849) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,9 +83,10 @@ ActiveRecord::Schema.define(version: 20150415102225) do
     t.integer  "exercise_id"
     t.text     "feedback"
     t.integer  "feedbacker_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.string   "content"
+    t.datetime "feedback_submitted_at"
   end
 
   add_index "responses", ["assignment_id"], name: "index_responses_on_assignment_id", using: :btree

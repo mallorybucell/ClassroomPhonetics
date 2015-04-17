@@ -12,13 +12,14 @@ class AssignmentsController < ApplicationController
     #students will never be false if not nil (all/any?)
     @course = Course.find(params["course_id"].to_i)
     students = lookup_course_students
-    if students.each do |student|
+    if students != nil && students != []
+      students.each do |student|
       Assignment.set!(student.id, params["lesson_id"].to_i, params["assignment"]["due_at"], current_user.id)
       end
       flash[:notice] = "Lesson assigned to students in #{@course.course_name}"
       redirect_to lesson_path(params["lesson_id"])
     else
-      flash[:notice] = e || "Something whent wrong, please try again."
+      flash[:notice] = e || "There are no students registered for this course. Please choose another course."
       redirect_to lesson_path(params["lesson_id"])
     end
   end
