@@ -39,6 +39,7 @@ class ResponsesController < ApplicationController
     else
       flash[:alert] = "Oops- that feedback could not be saved. Please try again."
       redirect_to :back
+    end
   end
 
   def submit_feedback
