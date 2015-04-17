@@ -28,6 +28,7 @@ class ResponsesController < ApplicationController
     else
       flash[:alert] = "This feedback has already been submitted to the student and cannot be edited. Please review another assignment."
       redirect_to :back
+    end
   end
 
   def update_feedback

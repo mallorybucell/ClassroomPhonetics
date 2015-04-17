@@ -54,9 +54,192 @@ $(function () {
     "ʔ": new Howl({
       urls: ['/ipa-sounds/VL_glottal_plosive.mp3']
     }),
-    "i": new Howl({
+//     // start here sound map
+    "ɱ": new Howl({
       urls: ['/ipa-sounds/close_front_unrounded.mp3']
     }),
+    "n": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+    "ɳ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+    
+    "ɲ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+    
+    "ŋ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+    
+    "ɴ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+
+    "ʙ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+    "r": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+    "ʀ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+    "&#x2C71;": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+    "ɾ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+    
+    "ɾ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+    "ɾ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+    "ɽ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+    "ɸ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+    "β": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+  "f": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+  "v": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+  
+  "θ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+  "ð": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+    "s": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+    "z": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+    "ʃ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+      "ʒ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+      "ʂ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+    "ʐ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+    "ç": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+    "ʝ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+    "x": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+  "ɣ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+    "χ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+    "ʁ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+    "ħ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+    "ʕ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+    "ʁ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+    "h": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+    "ɦ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+  "ɬ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+  "ɮ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+"ʋ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+"ɹ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
+"ɻ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+      }),
+    
+"j": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+"ɰ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+"l": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+"ɭ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+"ʎ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+"ʟ": new Howl({
+      urls: ['/ipa-sounds/close_front_unrounded.mp3']
+    }),
+
   }
 
   $('#chart td span').on("click", function(evt) {
