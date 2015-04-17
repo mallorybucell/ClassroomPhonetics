@@ -3,7 +3,7 @@ class DashboardsController < ApplicationController
   def show
     @courses = current_user.courses
     get_open_assignments
-    @total_outstanding_feedbacks = Response.needs_feedback(current_user)
+    @total_outstanding_feedbacks = Response.count_needs_feedback(current_user)
     @new_feedback_requests = Response.new_submits(current_user)
     render :teacher
   end
