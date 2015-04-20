@@ -1,30 +1,22 @@
 == README
 
-#Add Exercise Code explanation here
+Final project for The IronYard.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This program is meant to be a lightweight platform where teachers of linguistics (specifically phonetics), can easily and quickly port paper-pencil activities into the online/e-learning space, which will help with accessibility and communication.
 
-Things you may want to cover:
+Somewhere along the way, I switched goals from 'creating a basic cms where teachers can create lessons' and students receive texts reminding them of due-dates' to 'how do I build a back-end that lets teachers create lessons in a way that doesn't feel like using a template'?  Which was awesome fun to experiment with (also- so many partials), but in which I ran out of time before demo day.
 
-* Ruby version
+Current, most up-to-date branch is called 'prettify', which is what I reworked for demo-day.
 
-* System dependencies
+I'm going to finish building out my vision for this:
+-sms notfication
+-better teacher lesson creation interface
+-better/ cleaner front-end in general
 
-* Configuration
+But it still has some nifty features:
+- in lesson sound- and typing- references
+- easily creatable lessons with multimedia and creator-choices
 
-* Database creation
+Because I (inadvertently) changed directions so many times, the code is still kind of a mess and in first-draft form. 
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Refactor coming-soon!
